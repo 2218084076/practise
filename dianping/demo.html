@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JSON提交</title>
+    <script type="text/javascript" src="https://www.qianshanghua.com/static/js/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+    <textarea style="width:300px;height: 120px;"></textarea>
+    <button>submit</button>
+</body>
+</html>
+<script type="text/javascript">
+    $("body").on("click","button",function(){
+        console.log("click button")
+        $.ajax({
+            url: "http://127.0.0.1:8888/api/add_json",
+            data: {
+                json_str: $("textarea").val()
+            },
+            dataType: 'json',
+            type: 'POST',
+            success: function(data) {
+                console.log(data);
+                return $("textarea").val("")
+            },
+            error: function(data) {
+                return console.log(data);
+            }
+        });
+    })
+</script>
