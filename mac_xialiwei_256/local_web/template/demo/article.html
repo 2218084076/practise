@@ -24,7 +24,7 @@
             width: -webkit-fill-available;
         }
         .line_btns_btn{
-            width: 120px;
+            width: 100px;
             height: 30px;
             border-radius: 4px;
             background: #f5c5c5;
@@ -66,13 +66,14 @@
 </head>
 <body>
     <div style="display:none;">
-        <img id="cover_logo" src="/static/img/xhs_head_cover_logo1.png">
+        <img id="cover_logo" src="/static/img/xhs_head_cover_logo.png?t={{ handler.time_now }}">
     </div>
     <div class="line">
         <div class="line_title">小红书Json t</div>
         <div class="line_input"><input type="" name="" data-name="json_file"></div>
         <div class="line_btns">
             <button class="line_btns_btn get_json">Get Json</button>
+            <button class="line_btns_btn make_video">Make Video</button>
         </div>
     </div>
     <div class="line">

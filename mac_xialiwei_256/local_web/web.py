@@ -30,6 +30,7 @@ application = tornado.web.Application([
         (r"/demo/article",tool_article.ArticleDemoHandler),
         (r"/demo/video",tool_video.VideoDemoHandler),
         (r"/api/tool/video/get_one",tool_video.GetVideoOneAPIHandler),
+        (r"/api/tool/article/make_video",tool_article.MakeVideoArticleAPIHandler),
         (r"/api/tool/article/get_info",tool_article.GetArticleInfoAPIHandler),
         (r"/api/tool/article/get_json",tool_article.GetArticleJsonAPIHandler),
         (r"/static/(.*)", tornado.web.StaticFileHandler, dict(path=settings['static_path'])),
@@ -37,7 +38,7 @@ application = tornado.web.Application([
     ],**settings)
 
 if __name__ == "__main__":
-    tornado.options.define("port", default=8000, help="Run server on a specific port", type=int)
+    tornado.options.define("port", default=8888, help="Run server on a specific port", type=int)
     tornado.options.parse_command_line()
     application_server = tornado.httpserver.HTTPServer(application, xheaders=True)
     application_server.listen(tornado.options.options.port)

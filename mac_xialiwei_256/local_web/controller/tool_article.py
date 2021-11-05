@@ -11,13 +11,13 @@ import tornado.escape
 from tornado.escape import json_encode, json_decode
 import urllib
 import urllib.request
-
 import sys
 from selenium import webdriver
 import time
-
 import cv2
 import numpy as np
+import base64
+import random
 
 def add_alpha_channel(img):
     """ 为jpg图像添加alpha通道 """
@@ -27,7 +27,7 @@ def add_alpha_channel(img):
  
     img_new = cv2.merge((b_channel, g_channel, r_channel, alpha_channel)) # 融合通道
     return img_new
- 
+
 def merge_img(jpg_img, png_img, y1, y2, x1, x2):
     """ 将png透明图像与jpg图像叠加 
         y1,y2,x1,x2为叠加位置坐标值
@@ -80,8 +80,8 @@ def get_article_info(short_link):
     div_i_imgs = small_pic.find_elements_by_tag_name("i")
     num = 0
     image_links = []
-    # t = int(round(time.time() * 1000))  # 毫秒级时间戳
-    t = browser.current_url.split("/")[5].split('?')[0]
+    t = int(round(time.time() * 1000))  # 毫秒级时间戳
+    t = browser.current_url.split("/")[5].split("?")[0]
     t_is_exists = os.path.exists(os.path.join(os.path.dirname(__file__),'../static/files/%s.%s'%(t,"json")))
 
     if not t_is_exists:
@@ -102,8 +102,8 @@ def get_article_info(short_link):
         # 读取图像
         img_jpg = cv2.imread(img_jpg_path, cv2.IMREAD_UNCHANGED)
         img_png = cv2.imread(img_png_path, cv2.IMREAD_UNCHANGED)
-        img_jpg = cv2.resize(img_jpg,(200,200))
-        img_png = cv2.resize(img_png,(200,200))
+        img_jpg = cv2.resize(img_jpg,(400,400))
+        img_png = cv2.resize(img_png,(400,400))
      
         # 设置叠加位置坐标
         x1 = 0
@@ -160,7 +160,38 @@ def get_article_info(short_link):
         result = json_decode(f)
     browser.quit()
     return result
-
+class MakeVideoArticleAPIHandler(tornado.web.RequestHandler):
+    @tornado.gen.coroutine
+    def post(self):
+        imgs = json_decode(self.get_argument("imgs","[]"))
+        t = self.get_argument("t",None)
+        if not t:
+            self.finish({"info":"error"})
+            return
+        num = 0
+        img_remove_list = []
+        for img in imgs:
+            b64_data = img.split(';base64,')[1]
+            data = base64.b64decode(b64_data)
+            img_path = os.path.join(os.path.dirname(__file__),'../static/temp/%s_%s.%s'%(t,num,"png"))
+            img_path_jpg = os.path.join(os.path.dirname(__file__),'../static/temp/%s_%s.%s'%(t,num,"jpg"))
+            f = open(img_path, "ab")
+            f.write(data)  # 多媒体存储content
+            f.close()
+            f_cv = cv2.imread(img_path)
+            cv2.imwrite(img_path_jpg,f_cv)
+            num +=1
+            img_remove_list.append(img_path)
+            img_remove_list.append(img_path_jpg)
+        imgs_path = os.path.join(os.path.dirname(__file__),'../static/temp')
+        video_path = os.path.join(os.path.dirname(__file__),'../static/temp')
+        os.system("ffmpeg -y -r 2 -f image2 -i %s/%s_%%d.%s -vcodec libx264 %s/%s.mp4"%(imgs_path,t,"jpg",video_path,t))
+        for img_path in img_remove_list:
+            os.remove(img_path)
+        self.finish({"info":"ok","video":"/static/temp/%s.mp4"%(t)})
+        print('push 视频到手机')
+        # os.system(r'adb push %s/%s.mp4 sdcard/DCIM/Camera'%(video_path,t))
+        # os.system('adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/Camera')
 
 
 class ArticleDemoHandler(tornado.web.RequestHandler):
