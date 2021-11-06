@@ -94,8 +94,15 @@ def get_article_info(short_link):
         f = open(os.path.join(os.path.dirname(__file__),'../static/upload/%s_%s.%s'%(t,"head","jpg")), "ab")
         f.write(aim_response.content)  # 多媒体存储content
         f.close()
-
-
+        # target = r'D:\github\practise\mac_xialiwei_256\local_web\static\upload\60e87ea1000000002103b0ef_0.jpg'
+        #
+        # img = Image.open(target)
+        # draw = ImageDraw.Draw(img)
+        #
+        # font = ImageFont.truetype(r"C:\WINDOWS\Fonts\FZSTK.TTF", 40, encoding="unic")
+        # # windows 路径可以直接设置 "simsun.ttc"
+        # draw.text((100, 200), 'PUCO集美手账', (254, 254, 254), font=font)
+        # img.show()
         img_jpg_path = os.path.join(os.path.dirname(__file__),'../static/upload/%s_%s.%s'%(t,"head","jpg"))
         img_png_path = os.path.join(os.path.dirname(__file__),'../static/img/xhs_head_cover.png')
      
@@ -139,6 +146,7 @@ def get_article_info(short_link):
         time.sleep(3)
         browser.switch_to.window(browser.window_handles[1])
         user_xhs = browser.current_url.split("/user/profile/")[1]
+
         result = {
             "short_link":short_link,
             "type":"news",
@@ -185,14 +193,10 @@ class MakeVideoArticleAPIHandler(tornado.web.RequestHandler):
             img_remove_list.append(img_path_jpg)
         imgs_path = os.path.join(os.path.dirname(__file__),'../static/temp')
         video_path = os.path.join(os.path.dirname(__file__),'../static/temp')
-        os.system("ffmpeg -y -r 2 -f image2 -i %s/%s_%%d.%s -vcodec libx264 %s/%s.mp4"%(imgs_path,t,"jpg",video_path,t))
+        os.system("ffmpeg -y -r 0.5 -f image2 -i %s/%s_%%d.%s -vcodec libx264 %s/%s.mp4"%(imgs_path,t,"jpg",video_path,t))
         for img_path in img_remove_list:
             os.remove(img_path)
         self.finish({"info":"ok","video":"/static/temp/%s.mp4"%(t)})
-        print('push 视频到手机')
-        # os.system(r'adb push %s/%s.mp4 sdcard/DCIM/Camera'%(video_path,t))
-        # os.system('adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/Camera')
-
 
 class ArticleDemoHandler(tornado.web.RequestHandler):
     def get(self):
