@@ -1,5 +1,6 @@
 from selenium import webdriver
 import time
+import random
 
 '''d = webdriver.Chrome()
 def get_Tiktok_url(u):
@@ -16,22 +17,13 @@ while True:
     b=a.find_element_by_class_name('_314bde61933468933fabb30f1507cdb2-scss').click()'''
 key = '努力的打工人'
 share = input('抖音分享地址：')
-share='http'+share.split('http')[1].split('复制')[0]
+share='http'+share.split('http')[1].split('複淛')[0]
 d = webdriver.Chrome()
 d.get(share)
 time.sleep(20)
 
-for n in range(1,101):
-    d.execute_script('window.scrollBy(0,1000)')
-    time.sleep(1)
-
-a=d.find_element_by_xpath('//*[@id="root"]/div/div[2]/div/div[1]/div[3]/div/div/div[4]').find_elements_by_class_name('aa8946e6a10e3788dca09663eb82fc99-scss')
-#赞 _314bde61933468933fabb30f1507cdb2-scss fd385a3d6601897cdbce6252a3346600-scss
-#名_52058b306f496907c5d55c0facb81886-scss
-for i in range(0,len(a)+1):
-    if a[i].find_element_by_class_name('_52058b306f496907c5d55c0facb81886-scss').text.split('2021')[0] == key:
-        a[i].find_element_by_class_name('_314bde61933468933fabb30f1507cdb2-scss').click()
-    else:
-        print(a[i].find_element_by_class_name('_52058b306f496907c5d55c0facb81886-scss').text)
-
-
+a=d.find_elements_by_class_name('_314bde61933468933fabb30f1507cdb2-scss')
+for i in range(0,501):
+    a[i].click()
+    time.sleep(5)
+    print(i)
