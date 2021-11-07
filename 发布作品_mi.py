@@ -1,10 +1,9 @@
 import os
 import time
-from tool_article import get_article_info
 print("开启web server\n")
 # os.system("python D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\web.py")
 
-
+#点击分享
 os.system("adb shell input tap 1005 150")
 time.sleep(2)
 os.system("adb shell input tap 514 1860")
@@ -27,4 +26,20 @@ os.system("adb shell input swipe 260 365 260 365 500")
 time.sleep(3)
 os.system("adb shell input tap 487 207")
 
+print('点击小红书发布加号')
+os.system('adb shell input tap 540 2137')
+print("选择图片")
+img_add_num = 6
+x_base = 320
+x_add = 350
+y_base = 443
+y_add = 350
+for i in range(0,img_add_num):
+    x = x_base + x_add*(i%3)
+    y = y_base + y_add*(int(i/3))
+    os.system("adb shell input tap %s %s"%(x,y))
+    time.sleep(2)
+os.system('adb shell input tap 935 2144')
+time.sleep(2)
+os.system("")
 # os.system("adb shell monkey -p com.xingin.xhs -c android.intent.category.LAUNCHER 1")
