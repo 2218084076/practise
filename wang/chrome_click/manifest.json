@@ -1,0 +1,15 @@
+{
+  "name": "Terry作品-抖音评论区点赞",
+  "manifest_version": 2,
+  "version": "1.0",
+  "description": "实现抖音评论区点赞",
+  "browser_action": {
+    "default_icon": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.douyin.com/video/*"],
+      "js": ["script.js"]
+    }
+  ]
+}

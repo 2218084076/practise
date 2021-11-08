@@ -1,0 +1,29 @@
+{
+   "browser_action": {
+      "default_icon": {
+         "19": "images/icon19.png",
+         "38": "images/icon38.png"
+      },
+      "default_popup": "popup.html",
+      "default_title": "HOTPOOR划词翻译Beta"
+   },
+   "content_scripts": [ {
+      "all_frames": false,
+      "css": [ "css/translate_content.css" ],
+      "js": [ "js/jquery-1.12.4.min.js", "js/translate_content.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_end"
+   } ],
+   "description": "翻译·Translate的Chrome扩展，支持中文转英文，和英文转中文，由HOTPOOR团队出品。",
+   "icons": {
+      "128": "images/icon128.png",
+      "16": "images/icon16.png",
+      "48": "images/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuoM+9X4C0CmFkgg3SXn5apta5H/RGTvqkjnfPkm0Rr6lZiO7U5w/obTsUml8gXyebzzRzkWofTC40OAZAFp5KoiTnh4KFktu7TZJUBDx3OspJUYpx4IGcIwYitQYKP1WOYVprl6n+UvzZNgEOYbnduQ6D4mW4etrszFAlCIWyY+Fn6huOX4gSbrgKWXrHHZy6NbV7LmNWlksTgxNMGOIWZF8zV/nR/ccLBkF8X/Y9ZH3NgmhZf/YwMmloagEud0SBqHkZ7BXKe8VN1XVNViCuMPJEs54DPWYx7OIps0ZLjjbPVQCPJKlTuhzG/RiSxQFuxUrMxaQQEDXrVHbtiyDfQIDAQAB",
+   "manifest_version": 2,
+   "name": "HOTPOOR划词翻译Beta",
+   "permissions": [ "http://*/*", "https://*/*", "ws://*/*", "wss://*/*" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.1.1"
+}
