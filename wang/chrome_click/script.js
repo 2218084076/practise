@@ -1,6 +1,6 @@
 // alert("抖音评论区点赞");
   // 评论区博主名字
-name_list=['小猫咪滚滚','Coco子']
+name_list=['乐悠悠	','青春河南']
 num = 0
 function doit(){
 	setTimeout(function(){
