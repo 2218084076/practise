@@ -1,6 +1,6 @@
 // alert("抖音评论区点赞");
   // 评论区博主名字
-name_list=['乐悠悠	','青春河南']
+name_list=['小猫咪滚滚','Coco子']
 num = 0
 function doit(){
 	setTimeout(function(){
@@ -9,7 +9,7 @@ function doit(){
 			// console.log(list_now[i].getElementsByTagName("div"))
 			console.log(name_list.indexOf(list_now[i].getElementsByTagName("div")[5].textContent))
 			if(name_list.indexOf(list_now[i].getElementsByTagName("div")[5].textContent)>-1){
-				console.log("====")
+				console.log("<==++==>")
 				list_now[i].getElementsByTagName("div")[10].getElementsByTagName("p")[0].click()
 				num = 100
 				console.log(i)
