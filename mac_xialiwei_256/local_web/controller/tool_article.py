@@ -186,7 +186,7 @@ class MakeVideoArticleAPIHandler(tornado.web.RequestHandler):
             img_remove_list.append(img_path_jpg)
         imgs_path = os.path.join(os.path.dirname(__file__),'../static/temp')
         video_path = os.path.join(os.path.dirname(__file__),'../static/temp')
-        os.system("ffmpeg -y -r 1 -f image2 -i %s/%s_%%d.%s -vcodec libx264 %s/%s.mp4"%(imgs_path,t,"jpg",video_path,t))
+        os.system("ffmpeg -y -r 0.5 -f image2 -i %s/%s_%%d.%s -vcodec libx264 %s/%s.mp4"%(imgs_path,t,"jpg",video_path,t))
         for img_path in img_remove_list:
             os.remove(img_path)
         self.finish({"info":"ok","video":"/static/temp/%s.mp4"%(t)})
