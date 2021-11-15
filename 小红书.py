@@ -3,7 +3,7 @@ import time
 import random
 i=1
 # l=['869e65410721']
-while i<300:
+while i<280:
 	os.system("adb shell input tap 284 1328")
 	os.system("adb shell input swipe 951 994 80 975 100")
 	os.system("adb shell input swipe 951 994 80 975 100")
