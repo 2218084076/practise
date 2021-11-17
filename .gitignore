@@ -2,3 +2,6 @@
 hotpoor_autoclick_xhs
 20211111/PaddleGAN/
 PaddleGAN/
+.idea/vcs.xml
+*.xml
+*.py

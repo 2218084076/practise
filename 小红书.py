@@ -7,7 +7,7 @@ while i<280:
 	os.system("adb shell input tap 284 1328")
 	os.system("adb shell input swipe 951 994 80 975 100")
 	os.system("adb shell input swipe 951 994 80 975 100")
-	time.sleep(1)
+	time.sleep(2)
 	os.system("adb shell input tap 71 120")
 	time.sleep(2)
 	os.system("adb shell input tap 800 1414")
