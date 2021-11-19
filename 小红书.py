@@ -2,7 +2,7 @@ import os
 import time
 import random
 i=1
-l=['869e65410721']
+l=['a0e6c353']
 t=2
 while i<200:
 	# t=random.randint(3,8)
@@ -24,7 +24,7 @@ while i<200:
 		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
 		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
 		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
-		# time.sleep(t)
+		time.sleep(t)
 		os.system(f"adb -s {n} shell input tap 71 120")
 		time.sleep(t)
 		os.system(f"adb -s {n} shell input tap 800 1414")
