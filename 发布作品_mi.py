@@ -1,5 +1,7 @@
 import os
 import time
+import random
+
 print("开启web server\n")
 # os.system("python D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\web.py")
 
@@ -12,10 +14,13 @@ time.sleep(3)
 # os.system('"adb -s 869e65410721 shell input text "10.20.30.14:8888/demo/article"')
 os.system("adb -s 869e65410721 shell input tap 155 358")
 time.sleep(3)
-os.system('"adb -s 869e65410721 shell input text "618265a10000000001027d21"')
+os.system('"adb -s 869e65410721 shell input text "613486c40000000001028965"')
 time.sleep(6)
 os.system("adb -s 869e65410721 shell input tap 212 473")
-time.sleep(8)
+time.sleep(6)
+# os.system("adb -s 869e65410721 shell input tap 528 477")
+time.sleep(10)
+# print('======合成视频======')
 print('======复制======')
 os.system("adb -s 869e65410721 shell input tap 283 1231")
 time.sleep(2)
@@ -89,4 +94,27 @@ print('下一步')
 os.system("adb -s 869e65410721 shell input tap 984 162")
 time.sleep(3)
 os.system("")
+
+l=['869e65410721']
+t=2
+while i<280:
+	for n in l:
+		# t=random.randint(1,4)
+		os.system(f"adb -s {n} shell input tap 284 1328")
+		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
+		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
+		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
+		time.sleep(4)
+		os.system(f"adb -s {n} shell input tap 71 120")
+		time.sleep(t)
+		os.system(f"adb -s {n} shell input tap 800 1414")
+		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
+		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
+		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
+		# time.sleep(t)
+		os.system(f"adb -s {n} shell input tap 71 120")
+		time.sleep(t)
+	print(f'n={i} {t}s')
+	i += 1
+print("End")
 # os.system("adb shell monkey -p com.xingin.xhs -c android.intent.category.LAUNCHER 1")
