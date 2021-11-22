@@ -4,25 +4,13 @@ import random
 i=1
 l=['a0e6c353']
 t=2
-while i<200:
-	# t=random.randint(3,8)
-	# os.system("adb shell input tap 284 1328")
-	# os.system("adb shell input swipe 951 994 80 975 100")
-	# os.system("adb shell input swipe 951 994 80 975 100")
-	# time.sleep(2)
-	# os.system("adb shell input tap 71 120")
-	# time.sleep(2)
-	# os.system("adb shell input tap 800 1414")
-	# # os.system("adb shell input swipe 951 994 80 975 100")
-	# # os.system("adb shell input swipe 951 994 80 975 100")
-	# time.sleep(t)
-	# os.system("adb shell input tap 71 120")
-	# time.sleep(1)
+while i<150:
 	for n in l:
 		# t=random.randint(1,4)
 		os.system(f"adb -s {n} shell input tap 284 1328")
-		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
-		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
+		time.sleep(5)
+		# os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
+		# os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
 		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
 		time.sleep(t)
 		os.system(f"adb -s {n} shell input tap 71 120")
