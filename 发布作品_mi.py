@@ -2,119 +2,58 @@ import os
 import time
 import random
 
-print("开启web server\n")
-# os.system("python D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\web.py")
+pic_files = os.listdir(r'D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\static\upload')
+id_files = os.listdir(r'D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\static\files')
 
-print("#打开浏览器\n")
-os.system("adb -s 869e65410721 shell monkey -p com.android.browser -c android.intent.category.LAUNCHER 1")
-time.sleep(6)
-print('点击收藏')
-os.system("adb -s 869e65410721 shell input tap 338 1201")
-time.sleep(3)
-# os.system('"adb -s 869e65410721 shell input text "10.20.30.14:8888/demo/article"')
-os.system("adb -s 869e65410721 shell input tap 155 358")
-time.sleep(3)
-os.system('"adb -s 869e65410721 shell input text "613486c40000000001028965"')
-time.sleep(6)
-os.system("adb -s 869e65410721 shell input tap 212 473")
-time.sleep(6)
-# os.system("adb -s 869e65410721 shell input tap 528 477")
-time.sleep(10)
-# print('======合成视频======')
-print('======复制======')
-os.system("adb -s 869e65410721 shell input tap 283 1231")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 1062 532")
-time.sleep(2)
-print('======复制======')
-os.system("adb -s 869e65410721 shell input tap 286 1468")
-time.sleep(3)
-os.system("adb -s 869e65410721 shell input tap 1062 1058")
-time.sleep(3)
-print("======保存图片======")
-os.system("adb -s 869e65410721 shell input swipe 148 1801 148 1801 500")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 336 1756")
-time.sleep(2)
-print('1')
-os.system("adb -s 869e65410721 shell input swipe 333 1801 333 1801 500")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 336 1756")
-time.sleep(2)
-print('2')
-os.system("adb -s 869e65410721 shell input swipe 475 1801 475 1801 500")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 336 1756")
-time.sleep(2)
-print('3')
-os.system("adb -s 869e65410721 shell input swipe 637 1801 637 1801 500")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 336 1756")
-time.sleep(2)
-print('4')
-os.system("adb -s 869e65410721 shell input swipe 816 1801 816 1801 500")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 336 1756")
-time.sleep(2)
-print('5')
-print('打开小红书')
-os.system("adb -s 869e65410721 shell monkey -p com.xingin.xhs -c android.intent.category.LAUNCHER 1")
-time.sleep(8)
-print('点击小红书发布加号')
-os.system("adb -s 869e65410721 shell input tap 540 2151")
-time.sleep(3)
-print("选择图片")
-# img_add_num = 4
-# x_base = 320
-# x_add = 350
-# y_base = 443
-# y_add = 350
-# for i in range(0,img_add_num):
-#     x = x_base + x_add*(i%3)
-#     y = y_base + y_add*(int(i/3))
-#     os.system("adb shell input tap %s %s"%(x,y))
-#     time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 675 772")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 308 772")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 1037 401")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 311 401")
-time.sleep(2)
-os.system("adb -s 869e65410721 shell input tap 675 401")
-time.sleep(2)
+def set_file_time(filename, updatetime, access_time):
+    # 先传修改时间，再传访问时间
+    filename = os.path.abspath(filename)
+    new_updatetime = time.mktime(time.strptime(updatetime, '%Y-%m-%d %H:%M:%S'))
+    new_access_time = time.mktime(time.strptime(access_time, '%Y-%m-%d %H:%M:%S'))
+    os.utime(filename, (new_access_time, new_updatetime))
+
+id_list = []
+for id in id_files:
+    id_list.append(id[:-5])
+
+for i in id_list:
+	now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+	for pic in pic_files:
+		if pic.split('_')[0] == i:
+			print(pic)
+			path = fr'D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\static\upload\{pic}'
+			print(path)
+			set_file_time(path,now_time,now_time)
+
+	print(now_time)
+	time.sleep(2)
+	print("======push 上传图片======\n")
+	os.system(rf'adb -s 869e65410721 push D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\static\upload\{pic} /sdcard/DCIM/Camera')
+	time.sleep(8)
+	os.system('adb -s 869e65410721 shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/Camera/')
+	time.sleep(3)
+
+	print('打开小红书\n')
+	os.system("adb -s 869e65410721 shell monkey -p com.xingin.xhs -c android.intent.category.LAUNCHER 1")
+	time.sleep(8)
+
+	print('点击小红书发布加号\n')
+	os.system("adb -s 869e65410721 shell input tap 540 2151")
+	time.sleep(5)
+	os.system("adb -s 869e65410721 shell input tap 537 308")
+	time.sleep(3)
+
+	img_add_num = 4
+	x_base = 320
+	x_add = 350
+	y_base = 443
+	y_add = 350
+	for i in range(0,img_add_num):
+		x = x_base + x_add*(i%3)
+		y = y_base + y_add*(int(i/3))
+		os.system("adb shell input tap %s %s"%(x,y))
+		time.sleep(2)
 
 
-
-print('下一步')
-os.system("adb -s 869e65410721 shell input tap 931 2144")
-time.sleep(3)
-print('下一步')
-os.system("adb -s 869e65410721 shell input tap 984 162")
-time.sleep(3)
-os.system("")
-
-l=['869e65410721']
-t=2
-while i<280:
-	for n in l:
-		# t=random.randint(1,4)
-		os.system(f"adb -s {n} shell input tap 284 1328")
-		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
-		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
-		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
-		time.sleep(4)
-		os.system(f"adb -s {n} shell input tap 71 120")
-		time.sleep(t)
-		os.system(f"adb -s {n} shell input tap 800 1414")
-		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
-		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
-		os.system(f"adb -s {n} shell input swipe 951 994 80 975 100")
-		# time.sleep(t)
-		os.system(f"adb -s {n} shell input tap 71 120")
-		time.sleep(t)
-	print(f'n={i} {t}s')
-	i += 1
-print("End")
-# os.system("adb shell monkey -p com.xingin.xhs -c android.intent.category.LAUNCHER 1")
+# print("#打开浏览器\n")
+# os.system("adb -s 869e65410721 shell monkey -p com.android.browser -c android.intent.category.LAUNCHER 1")
