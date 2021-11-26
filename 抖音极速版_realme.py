@@ -7,7 +7,7 @@ n=1
 while True:
 	x=random.randint(498,598)
 	a=random.randint(15,35)
-	os.system(f"adb shell input swipe {x} 2050 {x} 321 150")
+	os.system(f"adb -s a0e6c353 shell input swipe {x} 2050 {x} 321 150")
 	time.sleep(a)
 	print(f"n={n},t={a}")
 	n=n+1

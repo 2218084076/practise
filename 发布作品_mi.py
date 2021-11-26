@@ -43,12 +43,14 @@ for i in id_list:
 	os.system("adb -s 869e65410721 shell input tap 537 308")
 	time.sleep(3)
 
-	img_add_num = 4
-	x_base = 320
-	x_add = 350
-	y_base = 443
-	y_add = 350
-	for i in range(0,img_add_num):
+	os.system('adb -s 869e65410721 shell input tap 537 308')
+
+    img_add_num = 4
+    x_base = 306
+    x_add = 362
+    y_base = 411
+    y_add = 350
+    for i in range(0,img_add_num):
 		x = x_base + x_add*(i%3)
 		y = y_base + y_add*(int(i/3))
 		os.system("adb shell input tap %s %s"%(x,y))
@@ -57,3 +59,30 @@ for i in id_list:
 
 # print("#打开浏览器\n")
 # os.system("adb -s 869e65410721 shell monkey -p com.android.browser -c android.intent.category.LAUNCHER 1")
+
+
+def sentReview(a):
+    #切换输入法
+    os.system('adb %s shell ime set com.android.adbkeyboard/.AdbIME' % a)
+    time.sleep(1)
+    #点入第一篇文章
+    os.system('adb %s shell input tap 800 1300' % a)
+    #点击评论
+    os.system('adb %s shell input tap 950 2150' % a)
+    time.sleep(1)
+    text(a)
+    time.sleep(0.5)
+    #点击发送
+    os.system('adb %s shell input tap 1000 1950' % a)
+    #切换回正常输入法
+    os.system('adb %s shell ime set com.baidu.input_mi/.ImeService' % a)
+    time.sleep(0.5)
+    #左上角返回
+    os.system('adb %s shell input tap 50 160' % a)
+
+def text(a):
+    #事先创建一个txt文件，里面放转发链接
+    f = open('buy.txt')
+    for line in f:
+        os.system("adb %s shell am broadcast -a ADB_INPUT_TEXT --es msg \'%s\'" % (a, line))
+    f.close()
