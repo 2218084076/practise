@@ -67,20 +67,21 @@ while True:
     for pic in pic_files:
         now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         # print(now_time)
-    if pic.split('_')[0] == id_list[n]:
-        print(id_list[n])
-        path = fr'D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\static\upload\{pic}'
-        set_file_time(path, now_time, now_time)
-        print(path)
-        print("======push 上传图片======\n")
-        os.system(rf'adb -s 869e65410721 push {path} /sdcard/DCIM/Camera')
-        time.sleep(5)
-        os.system('adb -s 869e65410721 shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/Camera/')
-        time.sleep(1)
-        os.remove(fr'{path}')
+        if pic.split('_')[0] == id_list[n]:
+            print(id_list[n])
+            path = fr'D:\github\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\static\upload\{pic}'
+            set_file_time(path, now_time, now_time)
+            print(path)
+            print("======push 上传图片======\n")
+            os.system(rf'adb -s 869e65410721 push {path} /sdcard/DCIM/Camera')
+            time.sleep(5)
+            os.system('adb -s 869e65410721 shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/Camera/')
+            time.sleep(1)
+            os.remove(fr'{path}')
     print('打开小红书')
     os.system("adb -s 869e65410721 shell monkey -p com.xingin.xhs -c android.intent.category.LAUNCHER 1")
     time.sleep(8)
+    now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     set_file_time(share_img, now_time, now_time)
     print('\npush share_img\n')
     os.system(rf'adb -s 869e65410721 push {share_img} /sdcard/DCIM/Camera')
