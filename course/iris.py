@@ -6,7 +6,7 @@ print('# （1）读取数据，将数据存成变量iris')
 iris = pd.read_csv(r'D:\__easyHelper__\iris.csv')
 print(f'iris.head(5)\n{iris.head(5)}')
 
-# 创建数据框的列名称['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class’]
+# 创建数据框的列名称['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class']
 print('# 创建数据框的列名称["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]')
 iris.columns = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class']
 print(f'iris.columns\n{iris.columns}')
