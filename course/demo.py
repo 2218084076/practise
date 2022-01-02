@@ -24,3 +24,47 @@
 #         l.append(i)
 # print(f'0~50内3的倍数为：{l}')
 
+
+# ===> 贺卡 <===
+# holiday = input('请输入节日：')
+# To_name = input('请输入收件人姓名：')
+# Fr_name = input('请输入送件人姓名：')
+# print ('--*--*--*--*--*--*--*--*--*--*--')
+# print('     节    日     祝       福')
+# print(f'Dear {To_name}:\n')
+# print('      祝您'+holiday+'快乐！\n')
+# print('      身体健康，心想事成，天天快乐！\n')
+# print('                      ' + Fr_name)
+# print('--*--*--*--*--*--*--*--*--*--*--')
+
+
+# ===> 计算门票价格 <====
+# a=input('游客人数')
+# a=int(a)
+# if a<=5:
+#     total = a*160
+#     print(f'{a}*160')
+# if a>5:
+#     total = a*140
+#     print(f'{a}*140')
+# print(f'{a}人 应付{total}')
+
+
+
+#   ===> 字典拼接 <===
+# a=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+# b=["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+# d = dict(zip(a,b))
+# print(d)
+
+#====> 奇偶分类 <====
+# numbers = [12, 37, 5, 42, 8, 3]
+# one = []
+# two = []
+# for n in numbers:
+#     if n%2 == 0:
+#         two.append(n)
+#     else:
+#         one.append(n)
+# print(f"奇数{one}")
+# print(f"偶数{two}")
