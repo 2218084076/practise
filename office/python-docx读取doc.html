@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<!-- saved from url=(0096)https://www.cnblogs.com/zhaobowen/p/13807092.html#4%E6%8C%89%E6%A0%B7%E5%BC%8F%E8%AF%BB%E5%8F%96 -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin-when-crossorigin">
+    <meta name="description" content="API: http://python-docx.readthedocs.io/en/latest/#api-documentation ##1.将doc转为docx python3.8中win32co">
+    <meta property="og:description" content="API: http://python-docx.readthedocs.io/en/latest/#api-documentation ##1.将doc转为docx python3.8中win32co">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>python-docx读取doc,docx文档 - 名字很长容易被惦记 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="https://common.cnblogs.com/favicon.svg" type="image/svg+xml">
+    
+    <style>:not(.cnblogs_code):not(.cnblogs_Highlighter)>pre:not([class*="language-"]):not([highlighted]):not(.hljs) {
+        background: rgb(245, 245, 245);
+        padding: 5px;
+        border: 1px solid rgb(204, 204, 204);
+        border-radius: 3px;
+        border-color: transparent;
+        color: rgb(0, 0, 0);
+        font-family: "Courier New", sans-serif;
+    }:not(.cnblogs_code):not(.cnblogs_Highlighter)>pre:not([highlighted]) code:not(.hljs) {
+            background: rgb(245, 245, 245) !important;
+            border-color: transparent !important;
+        }</style><link rel="stylesheet" href="./python-docx读取doc_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./python-docx读取doc_files/bundle-classicblue.min.css">
+    <link id="highlighter-theme-cnblogs" type="text/css" rel="stylesheet" href="./python-docx读取doc_files/cnblogs.css">
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./python-docx读取doc_files/bundle-classicblue-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhaobowen/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhaobowen/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhaobowen/wlwmanifest.xml">
+    <script type="text/javascript" async="" src="./python-docx读取doc_files/analytics.js.下载"></script><script>
+        var currentBlogId = 614397;
+        var currentBlogApp = 'zhaobowen';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'ClassicBlue';
+        var visitorUserId = '';
+        var hasCustomScript = false;
+        try {
+            if (hasCustomScript && document.referrer && document.referrer.indexOf('baidu.com') >= 0) {
+                Object.defineProperty(document, 'referrer', { value: '' });
+                Object.defineProperty(Document.prototype, 'referrer', { get: function(){ return ''; } });
+            }
+        } catch(error) { }
+        window.codeHighlightEngine = 1;
+        window.enableCodeLineNumber = false;
+        window.codeHighlightTheme = 'cnblogs';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-10-13 10:00';
+        </script>
+    <script src="./python-docx读取doc_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./python-docx读取doc_files/blog-common.min.js.下载"></script><style type="text/css">.medium-zoom-overlay{position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}.medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}.medium-zoom-image{cursor:pointer;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,0,.2,1)!important}.medium-zoom-image--hidden{visibility:hidden}.medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}</style><script id="hljs-script" async="" data-loaded="true" src="./python-docx读取doc_files/highlight.min.js.下载"></script>
+    
+    
+    
+</head>
+<body class="skin-classicblue has-navbar has-bannerbar hljs-engine">
+    <a name="top"></a>
+        <img src="./python-docx读取doc_files/35695-20220105153348668-1191227364.jpg" style="display:none" onload="countCreativeImpressions(&#39;C0-阿里云&#39;)">
+        <a href="https://developer.aliyun.com/topic/acp/database?utm_content=g_1000316453" onclick="countCreativeClicks(&#39;C0-阿里云&#39;)" target="_blank" rel="nofollow">
+            <div class="bannerbar forpc" style="background-size: contain; background-image: url(https://img2020.cnblogs.com/blog/35695/202201/35695-20220105153348668-1191227364.jpg);">
+                
+            </div>
+        </a>
+        <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://developer.aliyun.com/topic/acp/database?utm_content=g_1000316453" onclick="countCreativeClicks(&#39;M2-阿里云&#39;)" rel="nofollow">
+                <img src="./python-docx读取doc_files/35695-20220104144547250-1946030040.jpg" alt="" onload="countCreativeImpressions(&#39;M2-阿里云&#39;)">
+            </a>
+        </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="./python-docx读取doc_files/logo.svg" alt="博客园Logo"></a></li>
+                <li><a href="https://www.cnblogs.com/" onclick="countClicks(&#39;skin-navbar-sitehome&#39;)">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-news&#39;)">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-q&#39;)">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-brands&#39;)">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-ing&#39;)">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-edu&#39;)">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3">
+                        <button type="submit" id="zzk_search_button">
+                            <img src="./python-docx读取doc_files/search.svg" alt="搜索">
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔" style="display: none;">
+                        <img id="new_post_icon" class="navbar-icon" src="./python-docx读取doc_files/newpost.svg" alt="写随笔">
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客" style="display: none;">
+                        <img id="myblog_icon" class="navbar-icon" src="./python-docx读取doc_files/myblog.svg" alt="我的博客">
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息" style="display: none;">
+                        <img id="msg_icon" class="navbar-icon" src="./python-docx读取doc_files/message.svg" alt="短消息">
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown" style="display: none;">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="./python-docx读取doc_files/avatar-default.svg" alt="用户头像">
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="./python-docx读取doc_files/lite-mode-check.svg" class="hide"><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/" style="display: inline;">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()" style="display: inline;">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/zhaobowen/"><img id="blogLogo" src="./python-docx读取doc_files/logo.gif" alt="返回主页"></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhaobowen/">名字很长容易被惦记</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zhaobowen/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%90%8D%E5%AD%97%E5%BE%88%E9%95%BF%E5%AE%B9%E6%98%93%E8%A2%AB%E6%83%A6%E8%AE%B0">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/zhaobowen/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<span id="stats_post_count">随笔 - 120&nbsp; </span>
+<span id="stats_article_count">文章 - 1&nbsp; </span>
+<span id="stats-comment_count">评论 - 10&nbsp; </span>
+<span id="stats-total-view-count">阅读 - 
+<span title="总阅读数: 89224">
+89224</span></span>
+
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/zhaobowen/p/13807092.html">
+    <span>python-docx读取doc,docx文档</span>
+    
+
+
+
+</a><button class="cnblogs-toc-button" title="显示目录导航" aria-expanded="false"></button>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p></p><div class="toc"><div class="toc-container-header">目录</div><ul><li><a href="https://www.cnblogs.com/zhaobowen/p/13807092.html#1%E5%B0%86doc%E8%BD%AC%E4%B8%BAdocx">1.将doc转为docx</a></li><li><a href="https://www.cnblogs.com/zhaobowen/p/13807092.html#2%E8%AF%BB%E5%8F%96%E6%AE%B5%E8%90%BD">2.读取段落</a></li><li><a href="https://www.cnblogs.com/zhaobowen/p/13807092.html#3%E8%AF%BB%E5%8F%96%E8%A1%A8%E6%A0%BC">3.读取表格</a></li><li><a href="https://www.cnblogs.com/zhaobowen/p/13807092.html#4%E6%8C%89%E6%A0%B7%E5%BC%8F%E8%AF%BB%E5%8F%96">4.按样式读取</a></li><li><a href="https://www.cnblogs.com/zhaobowen/p/13807092.html#5%E8%8E%B7%E5%8F%96%E6%96%87%E5%AD%97%E6%A0%BC%E5%BC%8F%E4%BF%A1%E6%81%AF">5.获取文字格式信息</a></li><li><a href="https://www.cnblogs.com/zhaobowen/p/13807092.html#6%E8%AE%BE%E7%BD%AE%E9%A6%96%E8%A1%8C%E7%BC%A9%E8%BF%9B">6.设置首行缩进</a></li></ul></div><br>
+API:    <a href="http://python-docx.readthedocs.io/en/latest/#api-documentation" target="_blank">http://python-docx.readthedocs.io/en/latest/#api-documentation</a><p></p>
+<h2 id="1将doc转为docx">1.将doc转为docx<button class="cnblogs-toc-button" title="显示目录导航" aria-expanded="false"></button></h2>
+<p>python3.8中win32com 要安装pypiwin32 <code>pip install pypiwin32</code></p>
+<pre highlighted="true"><code class="hljs apache"><span class="hljs-attribute">from</span> win<span class="hljs-number">32</span>com import client as wc
+
+<span class="hljs-attribute">word</span> = wc.Dispatch(<span class="hljs-string">"Word.Application"</span>)
+<span class="hljs-attribute">doc</span> = word.Documents.Open(路径+名称.doc)
+<span class="hljs-attribute">doc</span>.SaveAs(路径+名称.docx, <span class="hljs-number">12</span>)   <span class="hljs-number">12</span>为docx
+<span class="hljs-attribute">doc</span>.Close()
+<span class="hljs-attribute">word</span>.Quit()
+</code></pre>
+<h2 id="2读取段落">2.读取段落<button class="cnblogs-toc-button" title="显示目录导航" aria-expanded="false"></button></h2>
+<pre highlighted="true"><code class="hljs haskell"><span class="hljs-keyword">import</span> docx
+<span class="hljs-title">docStr</span> = <span class="hljs-type">Document</span>(docName)   打开文档
+<span class="hljs-title">for</span> paragraph <span class="hljs-keyword">in</span> docStr.paragraphs:
+<span class="hljs-title">parStr</span> = paragraph.text
+<span class="hljs-comment">--》paragraph.style.name == 'Heading 1'  一级标题   </span>
+<span class="hljs-comment">--》paragraph.paragraph_format.alignment == 1  居中显示</span>
+<span class="hljs-comment">--》paragraph.style.next_paragraph_style.paragraph_format.alignment == 1  下一段居中显示</span>
+<span class="hljs-comment">--》paragraph.style.font.color</span>
+</code></pre>
+<h2 id="3读取表格">3.读取表格<button class="cnblogs-toc-button" title="显示目录导航" aria-expanded="false"></button></h2>
+<pre highlighted="true"><code class="hljs lua">numTables = docStr.tables
+<span class="hljs-keyword">for</span> <span class="hljs-built_in">table</span> <span class="hljs-keyword">in</span> numTables:
+#行列个数
+row_count = <span class="hljs-built_in">len</span>(<span class="hljs-built_in">table</span>.rows)
+col_count = <span class="hljs-built_in">len</span>(<span class="hljs-built_in">table</span>.columns)
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(row_count):
+    row = <span class="hljs-built_in">table</span>.rows[i].cells
+	i行j列内容：row[j].text
+
+或者：
+row_count = <span class="hljs-built_in">len</span>(<span class="hljs-built_in">table</span>.rows)
+col_count = <span class="hljs-built_in">len</span>(<span class="hljs-built_in">table</span>.columns)
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(row_count):
+    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(col_count):
+        <span class="hljs-built_in">print</span>(<span class="hljs-built_in">table</span>.cell(i,j).text)
+</code></pre>
+<h2 id="4按样式读取">4.按样式读取<button class="cnblogs-toc-button" title="显示目录导航" aria-expanded="false"></button></h2>
+<p><strong>读取标题</strong></p>
+<pre highlighted="true"><code class="hljs bash"><span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> doc.paragraphs:
+    <span class="hljs-keyword">if</span> p.style.name==<span class="hljs-string">'Heading 1'</span>:
+        <span class="hljs-built_in">print</span>(p.text)
+</code></pre>
+<pre highlighted="true"><code class="hljs swift"><span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> doc.paragraphs:
+    <span class="hljs-keyword">if</span> re.match(<span class="hljs-string">"^Heading \d+$"</span>,p.style.name):
+        <span class="hljs-built_in">print</span>(p.text)
+</code></pre>
+<p><strong>读取正文</strong></p>
+<pre highlighted="true"><code class="hljs bash"><span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> doc.paragraphs:
+    <span class="hljs-keyword">if</span> p.style.name==<span class="hljs-string">'Normal'</span>:
+        <span class="hljs-built_in">print</span>(p.text)
+</code></pre>
+<p><strong>获取docx支持的样式</strong></p>
+<pre highlighted="true"><code class="hljs python"><span class="hljs-keyword">from</span> docx.enum.style <span class="hljs-keyword">import</span> WD_STYLE_TYPE
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> s:
+    <span class="hljs-keyword">if</span> i.<span class="hljs-built_in">type</span>==WD_STYLE_TYPE.PARAGRAPH:
+        print(i.name)
+</code></pre>
+<h2 id="5获取文字格式信息">5.获取文字格式信息<button class="cnblogs-toc-button" title="显示目录导航" aria-expanded="false"></button></h2>
+<p>paragraph 对象 里还有更小的 run 对象，run 对象才包含了段落对象的文字信息。<br>
+paragraph.text 方法也是通过 run 对象的方法获取到文字信息的：</p>
+<pre highlighted="true"><code class="hljs vbnet">paragraph.<span class="hljs-keyword">text</span> 方法源码：
+
+def <span class="hljs-keyword">text</span>(self):
+     <span class="hljs-keyword">text</span> = <span class="hljs-comment">''</span>
+        <span class="hljs-keyword">for</span> run <span class="hljs-keyword">in</span> self.runs:
+            <span class="hljs-keyword">text</span> += run.<span class="hljs-keyword">text</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">text</span>
+</code></pre>
+<p>文字的字体、大小、下划线等信息都包含在 run 对象中（不清楚的看前面的博客）：</p>
+<pre highlighted="true"><code class="hljs dockerfile">获取段落的 <span class="hljs-keyword">run</span><span class="bash"> 对象列表</span>
+runs = par0.runs
+print(runs)
+获取 <span class="hljs-keyword">run</span><span class="bash"> 对象</span>
+run_0 = runs[<span class="hljs-number">0</span>]
+print(run_0.text) <span class="hljs-comment"># 获取 run 对象文字信息</span>
+打印结果：
+坚持因地制宜，差异化打造特色小镇，
+文档 段落 和 <span class="hljs-keyword">run</span><span class="bash"> 对象示意：</span>
+</code></pre>
+<pre highlighted="true" cnb-code-toolbar-active="true"><code class="hljs bash">获取文字格式信息：
+
+<span class="hljs-comment"># 获取文字格式信息</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'字体名称：'</span>,run_0.font.name)
+<span class="hljs-comment"># 字体名称： 宋体</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'字体大小：'</span>,run_0.font.size)
+<span class="hljs-comment"># 字体大小： 152400</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'是否加粗：'</span>,run_0.font.bold)
+<span class="hljs-comment"># 是否加粗： None</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'是否斜体：'</span>,run_0.font.italic)
+<span class="hljs-comment"># 是否斜体： True</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'字体颜色：'</span>,run_0.font.color.rgb)
+<span class="hljs-comment"># 字体颜色： FF0000</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'字体高亮：'</span>,run_0.font.highlight_color)
+<span class="hljs-comment"># 字体高亮： YELLOW (7)</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'下划线：'</span>,run_0.font.underline)
+<span class="hljs-comment"># 下划线： True</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'删除线：'</span>,run_0.font.strike)
+<span class="hljs-comment"># 删除线： None</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'双删除线：'</span>,run_0.font.double_strike)
+<span class="hljs-comment"># 双删除线： None</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'下标：'</span>,run_0.font.subscript)
+<span class="hljs-comment"># 下标： None</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">'上标：'</span>,run_0.font.superscript)
+<span class="hljs-comment"># 上标： None</span>
+LIK2
+
+</code><div class="cnb-code-toolbar" style="left: 1168px;"><span class="cnb-code-toolbar-item" cnb-code-toolbar-item-id="copy-1641553901183"><svg class="cnb-code-toolbar-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M878.250667 981.333333H375.338667a104.661333 104.661333 0 0 1-104.661334-104.661333V375.338667a104.661333 104.661333 0 0 1 104.661334-104.661334h502.912a104.661333 104.661333 0 0 1 104.661333 104.661334v502.912C981.333333 934.485333 934.485333 981.333333 878.250667 981.333333zM375.338667 364.373333a10.666667 10.666667 0 0 0-10.922667 10.965334v502.912c0 6.229333 4.693333 10.922667 10.922667 10.922666h502.912a10.666667 10.666667 0 0 0 10.922666-10.922666V375.338667a10.666667 10.666667 0 0 0-10.922666-10.922667H375.338667z"></path><path d="M192.597333 753.322667H147.328A104.661333 104.661333 0 0 1 42.666667 648.661333V147.328A104.661333 104.661333 0 0 1 147.328 42.666667H650.24a104.661333 104.661333 0 0 1 104.618667 104.661333v49.962667c0 26.538667-20.309333 46.848-46.848 46.848a46.037333 46.037333 0 0 1-46.848-46.848V147.328a10.666667 10.666667 0 0 0-10.922667-10.965333H147.328a10.666667 10.666667 0 0 0-10.965333 10.965333V650.24c0 6.229333 4.693333 10.922667 10.965333 10.922667h45.269333c26.538667 0 46.848 20.309333 46.848 46.848 0 26.538667-21.845333 45.312-46.848 45.312z"></path></svg> 复制</span><span class="cnb-code-toolbar-item" cnb-code-toolbar-item-id="fullscreen-1641553901183"><svg class="cnb-code-toolbar-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M149.52928355 149.52928355h258.90765513V45.96622222H97.74775349a51.78153127 51.78153127 0 0 0-51.78153127 51.78153127v310.68918519h103.56306133V149.52928355zM97.74775349 978.03377778h310.68918519v-103.56306133H149.52928355v-258.90765513H45.96622222v310.68918519a51.78153127 51.78153127 0 0 0 51.78153127 51.78153127z m880.28602429-51.78153127v-310.68918519h-103.56306133v258.90765513h-258.90765513v103.56306133h310.68918519a51.78153127 51.78153127 0 0 0 51.78153127-51.78153127zM615.56306132 149.52928355h258.90765513v258.90765513h103.56306133V97.74775349a51.78153127 51.78153127 0 0 0-51.78153127-51.78153127h-310.68918519v103.56306133z" fill=""></path></svg> 全屏</span></div></pre>
+<h2 id="6设置首行缩进">6.设置首行缩进<button class="cnblogs-toc-button" title="显示目录导航" aria-expanded="false"></button></h2>
+<pre highlighted="true"><code class="hljs apache"><span class="hljs-attribute">from</span> docx.shared import Inches,Pt
+<span class="hljs-attribute">par2</span> = doc.add_paragraph('段落文本')
+<span class="hljs-comment"># 左缩进,0.5 英寸</span>
+<span class="hljs-attribute">par2</span>.paragraph_format.left_indent = Inches(<span class="hljs-number">0</span>.<span class="hljs-number">5</span>)
+<span class="hljs-comment"># 右缩进,20 磅</span>
+<span class="hljs-attribute">par2</span>.paragraph_format.right_indent = Pt(<span class="hljs-number">20</span>)
+<span class="hljs-comment"># 首行缩进</span>
+<span class="hljs-attribute">par2</span>.paragraph_format.first_line_indent = Inches(<span class="hljs-number">1</span>)
+</code></pre>
+<p>查看首行缩进单位</p>
+<pre highlighted="true"><code class="hljs python"><span class="hljs-keyword">from</span> docx <span class="hljs-keyword">import</span> Document
+<span class="hljs-keyword">from</span> docx.shared <span class="hljs-keyword">import</span> Inches
+<span class="hljs-keyword">from</span> docx.oxml.ns <span class="hljs-keyword">import</span> qn
+
+<span class="hljs-keyword">from</span> docx.shared <span class="hljs-keyword">import</span> Cm, Pt
+<span class="hljs-keyword">from</span> docx.enum.text <span class="hljs-keyword">import</span> WD_PARAGRAPH_ALIGNMENT
+
+<span class="hljs-keyword">from</span> docx.shared <span class="hljs-keyword">import</span> RGBColor
+
+myDocument = Document(<span class="hljs-string">'2020年建交集团3月分析报告.docx'</span>)
+
+<span class="hljs-keyword">for</span> paragraph <span class="hljs-keyword">in</span> myDocument.paragraphs:
+	print(paragraph.paragraph_format.first_line_indent)
+	print(<span class="hljs-built_in">dir</span>(paragraph))
+</code></pre>
+<p>参考文档：<br>
+<a href="https://www.e1yu.com/9798.html" target="_blank">https://www.e1yu.com/9798.html</a><br>
+<a href="https://blog.csdn.net/weixin_45903952/article/details/106200213" target="_blank">https://blog.csdn.net/weixin_45903952/article/details/106200213</a><br>
+<a href="https://blog.csdn.net/xtfge0915/article/details/83479922" target="_blank">https://blog.csdn.net/xtfge0915/article/details/83479922</a><br>
+<a href="https://blog.csdn.net/zhouz92/article/details/107028727?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2" target="_blank">https://blog.csdn.net/zhouz92/article/details/107028727?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2</a><sub>all</sub>first_rank_v2~rank_v25-18-107028727.nonecase&amp;utm_term=python%20%E6%AE%B5%E8%90%BD%E8%AE%BE%E7%BD%AE&amp;spm=1000.2123.3001.4430<br>
+<a href="https://www.w3xue.com/exp/article/20207/92918.html" target="_blank">https://www.w3xue.com/exp/article/20207/92918.html</a></p>
+
+</div>
+<div id="MySignature">
+       ---------------------------------------------------------                                                                                   
+                                                   恐惧是因为努力的还不够，加油 ~~---------------------------------------------
+</div>
+<div class="clear"></div>
+<div id="blog_post_info_block"><div id="BlogPostCategory">
+    分类: 
+            <a href="https://www.cnblogs.com/zhaobowen/category/1815345.html" target="_blank">python语法、模块</a></div>
+<div id="EntryTag">
+    标签: 
+            <a href="https://www.cnblogs.com/zhaobowen/tag/python/">python</a></div>
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(13807092,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;2732795f-1e84-4fab-fc58-08d81c38b45b&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./python-docx读取doc_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./python-docx读取doc_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/zhaobowen/" target="_blank"><img src="./python-docx读取doc_files/20200703090730.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/zhaobowen/">名字很长容易被惦记</a><br>
+            <a href="https://home.cnblogs.com/u/zhaobowen/followees/">关注 - 1</a><br>
+            <a href="https://home.cnblogs.com/u/zhaobowen/followers/">粉丝 - 4</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;2732795f-1e84-4fab-fc58-08d81c38b45b&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(13807092,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(13807092,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/zhaobowen/p/13731624.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/zhaobowen/p/13731624.html" title="发布于 2020-09-29 18:07">Jenkins节点配置-K8S云节点</a>
+    <br>
+    <a href="https://www.cnblogs.com/zhaobowen/p/13930538.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/zhaobowen/p/13930538.html" title="发布于 2020-11-05 10:59">linux服务器添加普通账户脚本</a>
+
+</div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-10-13 10:00</span>&nbsp;
+<a href="https://www.cnblogs.com/zhaobowen/">名字很长容易被惦记</a>&nbsp;
+阅读(<span id="post_view_count">2656</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13807092" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(13807092);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: &#39;&#39;, targetType: &#39;blogPost&#39;, targetId: &#39;13807092&#39;, targetLink: &#39;https://www.cnblogs.com/zhaobowen/p/13807092.html&#39;, title: &#39;python-docx读取doc,docx文档&#39; })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+
+<script>
+    markdown_highlight()
+    var allowComments = true, cb_blogId = 614397, cb_blogApp = 'zhaobowen', cb_blogUserGuid = '2732795f-1e84-4fab-fc58-08d81c38b45b';
+    var cb_entryId = 13807092, cb_entryCreatedDate = '2020-10-13 10:00', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/zhaobowen/p/13807092.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/zhaobowen/p/13807092.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    登录后才能查看或发表评论，立即 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return account.login(&#39;!comments&#39;);">登录</a> 或者
+    <a href="https://www.cnblogs.com/">逛逛</a> 博客园首页
+</div>
+</div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="cnblogs_ch"><a href="https://developer.aliyun.com/topic/acp/database?utm_content=g_1000316453" target="_blank" onclick="gtag(&#39;event&#39;, &#39;click&#39;, {&#39;event_category&#39;: &#39;ad&#39;, &#39;event_label&#39;: &#39;T2-阿里云&#39;})">【推荐】阿里云数据库ACP认证重磅发布，认证特训营期待您的参与</a><br><a href="https://brands.cnblogs.com/huawei/p/2634" target="_blank" onclick="gtag(&#39;event&#39;, &#39;click&#39;, {&#39;event_category&#39;: &#39;ad&#39;, &#39;event_label&#39;: &#39;T2-华为专区&#39;})">【推荐】参与华为 HarmonyOS 开发者创新大赛，一起创造无限可能</a><br></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+            <a href="https://developer.aliyun.com/topic/acp/database?utm_content=g_1000316453" rel="nofollow" target="_blank" onclick="countCreativeClicks(&#39;C1-阿里云&#39;)">
+                <img src="./python-docx读取doc_files/35695-20220104144557973-546128728.jpg" onload="countCreativeImpressions(&#39;C1-阿里云&#39;)" alt="">
+                
+            </a>
+    </div>
+    <div id="under_post_card1"><div class="under-post-card">
+<b>编辑推荐：</b>
+<br>
+
+· <a href="https://www.cnblogs.com/CreateMyself/p/15755657.html" target="_blank">实践剖析 .NET Core 如何支持 Cookie 和 JWT 混合认证、授权</a>
+    <br>
+· <a href="https://www.cnblogs.com/lindexi/p/15768396.html" target="_blank">探索 dotnet core 为何在 Windows7 系统需要补丁的原因 </a>
+    <br>
+· <a href="https://www.cnblogs.com/yexiaochai/p/15762930.html" target="_blank">技术管理进阶——精要主义设计人生，对混乱的工作说不</a>
+    <br>
+· <a href="https://www.cnblogs.com/ang/p/13620452.html" target="_blank">Dapper in .Net Core</a>
+    <br>
+· <a href="https://www.cnblogs.com/code4nothing/p/build-todolist-14.html" target="_blank"> 使用.NET 6开发TodoList应用(14)——实现查询过滤 </a>
+    <br>
+</div></div>
+    <div id="under_post_card2"><div class="itnews under-post-card">
+    <b>最新新闻</b>：
+    <br>
+ ·          <a href="https://news.cnblogs.com/n/710610/" target="_blank">英特尔挖走苹果M1芯片功臣，他主导苹果放弃x86架构</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/710609/" target="_blank">TCL发布全新品牌口号 多项黑科技亮相CES2022</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/710608/" target="_blank">索尼造车，意在中国？</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/710607/" target="_blank">华为人事调整：丁耘担任企业BG总裁</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/710606/" target="_blank">马斯克开了个杂货铺</a>
+        <br>
+    » <a href="https://news.cnblogs.com/" title="IT 新闻" target="_blank">更多新闻...</a>
+</div></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+        var commentManager = new blogCommentManager();
+        commentManager.renderComments(0);
+        fixPostBody();
+
+                                        window.tocManager.displayDisableTocTips = false
+                                        window.tocManager.generateToc();
+            setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverT2();
+        deliverC1C2();
+        loadNewsAndKb();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="">
+
+<table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar" border="0">
+    <tbody>
+        <tr>
+            <td colspan="7">
+                <table class="CalTitle" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2021/12/07&#39;); return false;">&lt;</a>
+                            </td>
+                            <td align="center">2022年1月</td>
+                            <td align="right" class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2022/02/07&#39;); return false;">&gt;</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    <tr>
+        <th class="CalDayHeader" align="center" abbr="日" scope="col">日</th>
+        <th class="CalDayHeader" align="center" abbr="一" scope="col">一</th>
+        <th class="CalDayHeader" align="center" abbr="二" scope="col">二</th>
+        <th class="CalDayHeader" align="center" abbr="三" scope="col">三</th>
+        <th class="CalDayHeader" align="center" abbr="四" scope="col">四</th>
+        <th class="CalDayHeader" align="center" abbr="五" scope="col">五</th>
+        <th class="CalDayHeader" align="center" abbr="六" scope="col">六</th>
+    </tr>
+            <tr>
+                            <td class="CalOtherMonthDay" align="center">26</td>
+                            <td class="CalOtherMonthDay" align="center">27</td>
+                            <td class="CalOtherMonthDay" align="center">28</td>
+                            <td class="CalOtherMonthDay" align="center">29</td>
+                            <td class="CalOtherMonthDay" align="center">30</td>
+                            <td class="CalOtherMonthDay" align="center">31</td>
+                    <td class="CalWeekendDay" align="center">
+                        1
+                    </td>
+            </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            2
+                        </td>
+                            <td class="" align="center">
+                                3
+                            </td>
+                            <td class="" align="center">
+                                4
+                            </td>
+                            <td class="" align="center">
+                                5
+                            </td>
+                            <td class="" align="center">
+                                6
+                            </td>
+                            <td class="CalTodayDay" align="center">
+                                7
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            8
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            9
+                        </td>
+                            <td class="" align="center">
+                                10
+                            </td>
+                            <td class="" align="center">
+                                11
+                            </td>
+                            <td class="" align="center">
+                                12
+                            </td>
+                            <td class="" align="center">
+                                13
+                            </td>
+                            <td class="" align="center">
+                                14
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            15
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            16
+                        </td>
+                            <td class="" align="center">
+                                17
+                            </td>
+                            <td class="" align="center">
+                                18
+                            </td>
+                            <td class="" align="center">
+                                19
+                            </td>
+                            <td class="" align="center">
+                                20
+                            </td>
+                            <td class="" align="center">
+                                21
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            22
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            23
+                        </td>
+                            <td class="" align="center">
+                                24
+                            </td>
+                            <td class="" align="center">
+                                25
+                            </td>
+                            <td class="" align="center">
+                                26
+                            </td>
+                            <td class="" align="center">
+                                27
+                            </td>
+                            <td class="" align="center">
+                                28
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            29
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            30
+                        </td>
+                            <td class="" align="center">
+                                31
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                1
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                2
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                3
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                4
+                            </td>
+                        <td class="CalOtherMonthDay" align="center">
+                            5
+                        </td>
+                </tr>
+    </tbody>
+</table></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    
+</div>
+
+<!-- 常用链接 -->
+
+
+<!-- 最新随笔 -->
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block"><div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/docker/">docker<span class="tag-count">(7)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/jenkins/">jenkins<span class="tag-count">(4)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/python/">python<span class="tag-count">(4)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/pipeline/">pipeline<span class="tag-count">(3)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/mysql/">mysql<span class="tag-count">(3)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/k8s/">k8s<span class="tag-count">(2)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/ansiable/">ansiable<span class="tag-count">(2)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<span class="tag-count">(1)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/thkiner/">thkiner<span class="tag-count">(1)</span></a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/zhaobowen/tag/shell/">shell<span class="tag-count">(1)</span></a>
+        </li>
+    <li>
+        <a href="https://www.cnblogs.com/zhaobowen/tag/">更多</a>
+    </li>
+
+</ul>
+</div>
+
+</div>
+
+<!-- 积分与排名 -->
+
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+
+    <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+        <h3 class="catListTitle">
+            
+随笔分类
+
+
+
+        </h3>
+
+        <ul>
+
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1800356.html" class="category-item-link" rel="" target="">devops实践日志(2)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1800353.html" class="category-item-link" rel="" target="">devops组件(9)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1800332.html" class="category-item-link" rel="" target="">docker(10)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1809190.html" class="category-item-link" rel="" target="">k8s(16)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1809226.html" class="category-item-link" rel="" target="">Linux(18)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1811333.html" class="category-item-link" rel="" target="">mongodb(3)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1811232.html" class="category-item-link" rel="" target="">mysql(8)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1832304.html" class="category-item-link" rel="" target="">pipeline语法实例(4)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1801538.html" class="category-item-link" rel="" target="">python项目(22)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1815345.html" class="category-item-link" rel="" target="">python语法、模块(24)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1813854.html" class="category-item-link" rel="" target="">rancher(2)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1876377.html" class="category-item-link" rel="" target="">shell(1)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1809225.html" class="category-item-link" rel="" target="">常用操作(17)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/category/1802143.html" class="category-item-link" rel="" target="">项目管理(6)</a>
+ 
+                </li>                
+            
+        </ul>
+
+
+    </div>    
+    <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+        <h3 class="catListTitle">
+            
+随笔档案
+
+
+
+        </h3>
+
+        <ul>
+
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2021/06.html" class="category-item-link" rel="" target="">2021年6月(1)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2021/05.html" class="category-item-link" rel="" target="">2021年5月(1)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2021/04.html" class="category-item-link" rel="" target="">2021年4月(3)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2021/03.html" class="category-item-link" rel="" target="">2021年3月(4)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2021/01.html" class="category-item-link" rel="" target="">2021年1月(3)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2020/12.html" class="category-item-link" rel="" target="">2020年12月(9)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2020/11.html" class="category-item-link" rel="" target="">2020年11月(5)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2020/10.html" class="category-item-link" rel="" target="">2020年10月(1)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2020/09.html" class="category-item-link" rel="" target="">2020年9月(4)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2020/08.html" class="category-item-link" rel="" target="">2020年8月(30)</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/zhaobowen/archive/2020/07.html" class="category-item-link" rel="" target="">2020年7月(59)</a>
+ 
+                </li>                
+            
+        </ul>
+
+
+    </div>    
+</div>
+
+<!-- 最新评论 -->
+
+
+
+<!-- 阅读排行榜 -->
+<div id="sidebar_topviewedposts" class="sidebar-block"><div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/zhaobowen/p/13399409.html">
+                            1. 使用kubeadm部署k8s多master集群(一)集群部署(5782)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zhaobowen/p/13321578.html">
+                            2. 自签名证书和CA证书的区别和制作、使用(5455)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zhaobowen/p/13378217.html">
+                            3. rancher证书过期X509：certificate has expired or is not ye valid(4963)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zhaobowen/p/13963343.html">
+                            4. 使用kubectl config控制多个k8s集群(4093)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zhaobowen/p/13474667.html">
+                            5. 使用docker-compose管理docker容器(3223)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+</div>
+
+<!-- 评论排行榜 -->
+
+
+<!-- 推荐排行榜 -->
+<div id="sidebar_topdiggedposts" class="sidebar-block">
+<div id="topdigg_posts_wrap">
+    <div class="catListView">
+        <h3 class="catListTitle">推荐排行榜</h3>
+        <div id="TopDiggPostsBlock">
+            <ul style="word-break: break-all">
+                        <li>
+                            <a href="https://www.cnblogs.com/zhaobowen/p/13378217.html">
+                                1. rancher证书过期X509：certificate has expired or is not ye valid(2)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/zhaobowen/p/13493545.html">
+                                2. granfna展示mysql数据源(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/zhaobowen/p/13363677.html">
+                                3. Nexus构建npm、yum、maven私有仓库(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/zhaobowen/p/13360775.html">
+                                4. pycharm2020.1.3破解(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/zhaobowen/p/13321578.html">
+                                5. 自签名证书和CA证书的区别和制作、使用(1)
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+</div></div></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright © 2022 名字很长容易被惦记
+<br><span id="poweredby">Powered by .NET 6 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8GsLOKiGtk1Au0UP1SouGdUconw6vdQwxgvQT1cJCQsfgTt0MCCSKPy1sDW6IEyQDLJKz77UcaYTmHnv93Mw3GcYWZNWPikRcjxOut5hD3FF6zT91YR9YSCk-4RAvvkulex2cBtxqt07LVx7MBH-msI">
+    <script async="" src="./python-docx读取doc_files/js"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var kv = getGACustom();
+    if (kv) {
+        gtag('set', kv);
+    }
+    gtag('config', 'UA-476124-1');
+    </script>
+    <script defer="" src="./python-docx读取doc_files/hm.js.下载"></script>
+
+</body></html>
