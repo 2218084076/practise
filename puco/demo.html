@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="{{ url_for('static', filename='js/jquery-1.7.1.min.js') }}"></script>
+</head>
+<body>
+    <input type="button" value="show log" οnclick="show()"/>
+    <input type="hidden" id="number" value="01"><br>
+    用户：<a id="user"></a><br>
+    年龄：<a id="age"></a><br>
+    信息：<a id="p0"></a><br>
+    <a id="p1"></a>
+</body>
+<script>
+     function show(){
+        var number= document.getElementById("number").value;
+        var data= {
+                data: JSON.stringify({
+                    'number': number
+                }),
+            }
+        $.ajax({
+            url:"{{ url_for('history') }}",
+            type:"post",
+            data:data,
+            dataType: 'json',
+            success:function(data){
+                $(user).text(data.name);
+                 $(age).text(data.age);
+                 for(var i=0;i<data.mess1.length;i++){
+                    $("#p"+i).text(data.mess1[i]);
+                }
+            },
+            error:function(e){
+                    alert("error");
+            }
+        })
+    }
+</script>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
