@@ -1,0 +1,45 @@
+<textarea id="wlb_2022_01_19_check_value"></textarea>
+<button id="wlb_2022_01_19_check_value_check">check</button>
+<script type="text/coffeescript">
+
+result_next_action =(result=[])->
+    if result[0]==true
+        console.log "action now",result
+    else
+        console.log "no action",result
+check_str = (aim_str,find_now=false,comment_id=null)->
+    do ()->
+        $.ajax
+            url:"/api/page/comment/load"
+            data:
+                chat_id: "8125d3358cc143d09d274d67e906b0fa"
+                comment_id: comment_id
+                time_now: (new Date()).getTime()
+            dataType: 'json'
+            type: 'GET'
+            success:(data)->
+                console.log "=================="
+                console.log data
+                if data.info !="ok"
+                    return result_next_action([false,"no data"])
+                for i in data.comments
+                    console.log aim_str,JSON.parse(i[4])["box-title"],JSON.parse(i[4])["box-title"] == aim_str
+                    if JSON.parse(i[4])["box-title"] == aim_str
+                        result = [true,JSON.parse(i[4])]
+                        find_now = true
+                        break
+                if find_now == true
+                    return result_next_action(result)
+                if data.last_comment_id == null
+                    return result_next_action(result)
+                check_str aim_str,false,data.last_comment_id
+            error:(data)->
+                console.log ".."
+
+$("body").on "click","#wlb_2022_01_19_check_value_check",(evt)->
+    dom = $("#wlb_2022_01_19_check_value")
+    dom_json = JSON.parse dom.val()
+    console.log dom_json["detail-box-title"]
+    check_str dom_json["detail-box-title"],false,null
+</script>
+<script src="/static/js/coffeescript.js?v=1"></script>
