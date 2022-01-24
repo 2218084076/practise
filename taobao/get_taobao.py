@@ -1,3 +1,19 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+browser = webdriver.Chrome()
+
+def get_elements(url):
+    browser.get(url)
+    time.sleep(3)
+    shop_name = browser.find_element(By.CLASS_NAME,"tb-detail-hd").text
+    price = browser.find_element(By.CLASS_NAME,"tm-promo-cur").text
+    address = browser.find_element(By.CLASS_NAME,'tb-meta').text
+    sell_indcon = browser.find_element(By.CLASS_NAME,r'''tm-ind-item tm-ind-sellCount''').text
+    evaluation = browser.find_element(By.CLASS_NAME,'''canClick tm-line3''').text
+    product_types = browser.find_element(By.CLASS_NAME,'''tb-prop tm-sale-prop tm-clear''').text
+    return shop_name,price,address,sell_indcon,evaluation,product_types
 
 
 urls_list = [
@@ -10,5 +26,5 @@ for i in urls_list:
 print(len(urls))
 print(len(urls_list))
 
-
-
+for u in urls:
+    print(get_elements(u))
