@@ -9,3 +9,6 @@ for i in urls_list:
         urls.append(i)
 print(len(urls))
 print(len(urls_list))
+
+
+
