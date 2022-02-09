@@ -1,0 +1,1 @@
+document.getElementsByClassName("daren-card")[0].getAttribute
