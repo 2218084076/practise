@@ -47,7 +47,7 @@ comments_use_action=()->
     for [comment,comment_id,comment_use] in comments_use
         $(".wlb_dyzbjl").append """
 <tr class="wlb_td" data-comment-id="#{comment_id}_#{comment[0]}">
-    <td><button class="del">删除</button><button class="edit">修改</button><button class="update">更新</button></td>
+    <td><button class="del">删除</button><button class="edit">修改</button><button class="update">更新</button><button class="save_td">save</button></td>
     <td style="text-align:center;font-size:15px;">#{i}</td>
     <td style="text-align:center">#{comment_use["uid"]}</td>
     <td>#{comment_use["first_pioneer"]}</td>
@@ -72,7 +72,7 @@ show_content_in_load =(chat_id,comment_id=null)->
             chat_id:chat_id
             comment_id:comment_id
         success:(data)->
-            console.log data
+            console.log "success",data
             if data.info=="ok"
                 for comment in data.comments
                     console.log comment
@@ -85,13 +85,13 @@ show_content_in_load =(chat_id,comment_id=null)->
                 if data.last_comment_id !=null
                     show_content_in_load(chat_id,data.last_comment_id)
         error:(data)->
-            console.log data
+            console.log "error",data
 
 check_content_comment_edit = (chat_id,comment_id)->
     $(".wlb_td[data-comment-id='#{comment_id}']").attr("contenteditable",true)
 
 check_content_comment_update = (chat_id,data_comment_id,comment_id)->
-    tds = $(".wlb_td[data-comment-id=#{comment_id}]>td")
+    tds = $(".wlb_td[data-comment-id=#{data_comment_id}]>td")
     console.log tds
     remark_content_list = []
     td_num=0
@@ -120,23 +120,60 @@ check_content_comment_update = (chat_id,data_comment_id,comment_id)->
             console.log data
         error:(data)->
             console.log data
-            $.ajax
-                url:"/api/page/comment/load"
-                type:"GET"
-                dataType:"json"
-                data:
-                    chat_id:chat_id
-                    comment_id:comment_id
-                success:(data)->
-                    console.log data
-                    if data.info == "ok"
-                        for comment in data.comments
-                            remarks_json = null
-                            try
-                                remarks_json = JSON.parse(comment[5])
-                            catch e
-                                continue
-                            remarks=remarks_json["remarks"]
+
+
+check_content_comment_save_td =(chat_id,comment_id=null)->
+    $.ajax
+        url:"/api/page/comment/load"
+        type:"GET"
+        dataType:"json"
+        data:
+            chat_id:chat_id
+            comment_id:comment_id
+        success:(data)->
+            console.log "success",data
+            if data.info == "ok"
+                for comment in data.comments
+                    remarks_list = null
+                    remark_num = comment[5]["remarks"].length
+                    try
+                        remarks_list = JSON.parse(comment[5]["remarks"][remark_num-1][1])
+                        console.log "remarks_list",remarks_list
+                    catch e
+                        continue
+                    remarks_json =
+                        "uid":remarks_list[0]
+                        "first_pioneer":remarks_list[1]
+                        "first_pioneer_user_id":remarks_list[2]
+                        "first_contact":remarks_list[3]
+                        "first_contact_user_id":remarks_list[4]
+                        "date":remarks_list[5]
+                        "second_pioneer":remarks_list[6]
+                        "second_contact":remarks_list[8]
+                    comments_use.push [comment,data.comment_id,remarks_json]
+                    console.log comments_use
+                    if data.last_comment_id != null
+                        i=1
+                        for [comment,comment_id,comment_use] in comments_use
+                            $(".wlb_dyzbjl").append """
+                    <tr class="wlb_td" data-comment-id="#{comment_id}_#{comment[0]}+1">
+                        <td><button class="del">删除</button><button class="edit">修改</button><button class="update">更新</button><button class="save_td">save</button></td>
+                        <td style="text-align:center;font-size:15px;">#{i}</td>
+                        <td style="text-align:center">#{comment_use["uid"]}</td>
+                        <td>#{comment_use["first_pioneer"]}</td>
+                        <td style="text-align:center">#{comment_use["first_pioneer_user_id"]}</td>
+                        <td>#{comment_use["first_contact"]}</td>
+                        <td>#{comment_use["first_contact_user_id"]}</td>
+                        <td>#{comment_use["date"]}</td>
+                        <td>#{comment_use["first_contact"]}</td>
+                        <td>#{comment_use["second_pioneer"]}</td>
+                        <td>#{comment_use["second_contact"]}</td>
+                        <td></td>
+                    </tr>
+                    """
+                            i++
+        error:(data)->
+            console.log "error",data
 
 check_content_comment_del = (chat_id,comment_id)->
     console.log comment_id
@@ -180,7 +217,7 @@ check_content_remove = (user_id,chat_id,comment_id=null)->
                     else
                         alert "无法删除"
 
-check_content_action_in_load = (uid,conetnt_list,date,user_id,chat_id,comment_id=null)->
+check_content_action_in_load = (uid,content_list,user_id,chat_id,comment_id=null)->
     contact=$(".wlb_dyzbjl>tbody>tr>td")[5].innerText
     $.ajax
         url:"/api/page/comment/load"
@@ -208,7 +245,7 @@ check_content_action_in_load = (uid,conetnt_list,date,user_id,chat_id,comment_id
                         "first_pioneer":content_list[1]
                         "first_pioneer_user_id":content_list[2]
                         "first_contact":content_list[3]
-                        "first_contact_user_id"content_list[4]
+                        "first_contact_user_id":content_list[4]
                         "date":content_list[5]
                         "second_pioneer":content_list[6]
                         "second_contact":content_list[8]
@@ -235,7 +272,7 @@ check_content_action_in_load = (uid,conetnt_list,date,user_id,chat_id,comment_id
                         "first_pioneer":content_list[1]
                         "first_pioneer_user_id":content_list[2]
                         "first_contact":content_list[3]
-                        "first_contact_user_id"content_list[4]
+                        "first_contact_user_id":content_list[4]
                         "date":content_list[5]
                         "second_pioneer":content_list[6]
                         "second_contact":content_list[8]
@@ -257,9 +294,24 @@ check_content_action_in_load = (uid,conetnt_list,date,user_id,chat_id,comment_id
 
 show_content_in_load("abd538cb8cbf418781d006aa091f9162")
 
+$("body").on "click",".save_td",()->
+    data_comment_id = $($(this).parents(".wlb_td")[0]).attr("data-comment-id")
+    tds = $(".wlb_td[data-comment-id=#{data_comment_id}]>td")
+    # tds = $(".wlb_td[data-comment-id='737258cd03b94f118b72d9b9edc74042_t3wi9r']>td")
+    # 737258cd03b94f118b72d9b9edc74042_t3wi9r
+    console.log tds
+    content_list = []
+    td_num=0
+    for td in tds
+        if td_num in [0,1]
+            td_num=td_num+1
+            continue
+        content_list.push $(td).text()
+    uid = content_list[0]
+    check_content_comment_save_td "abd538cb8cbf418781d006aa091f9162",content_list,null
+
 $("body").on "click",".update",()->
     data_comment_id = $($(this).parents(".wlb_td")[0]).attr("data-comment-id")
-    # data_comment_id "abd538cb8cbf418781d006aa091f9162",data_comment_id
     check_content_comment_update "abd538cb8cbf418781d006aa091f9162",data_comment_id
 
 $("body").on "click",".edit",()->
@@ -303,6 +355,8 @@ $("body").on "click",".wlb_save_line",(e)->
             td_num=td_num+1
             continue
         content_list.push $(td).text()
-    check_content_action_in_load uid,conetnt_list,date,USER_ID,"abd538cb8cbf418781d006aa091f9162",null
+    console.log content_list
+    uid = content_list[0]
+    check_content_action_in_load uid,content_list,USER_ID,"abd538cb8cbf418781d006aa091f9162",null
 </script>
 <script src="/static/js/coffeescript.js"></script>

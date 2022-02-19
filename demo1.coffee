@@ -4,7 +4,7 @@
 <script type="text/coffeescript">
 $("#www").append """
 <tr class="wlb_th">
-    <th style="width: 99999px">编号</tn>
+    <th style="width: 19000px">编号</tn>
     <th style="width: 999999px">博主</th>
     <th style="width: 9999999px">粉丝数</th>
     <th style="width: 9999999px">合作店铺数</th>
