@@ -42,7 +42,9 @@ root = exports ? this
 root.Hs or= {}
 Hs = root.Hs
 
-
+if USER_ID.indexOf("no_login")>-1
+    window.location.href="https://www.qianshanghua.com/home/office"
+    return
 comments_use=[]
 comments_use_action=()->
     i=1
@@ -56,6 +58,11 @@ comments_use_action=()->
             has_mark = true
         catch e
             has_mark = false
+        _html_control="""
+        <button class="del">删除</button><button class="edit">修改</button><button class="update">更新</button>
+        """
+        if USER_ID != comment[1]
+            _html_control=""
         if has_mark
             remarks_json =
                 "uid":remarks_list[0]
@@ -67,7 +74,7 @@ comments_use_action=()->
                 "second_pioneer":remarks_list[6]
                 "second_contact":remarks_list[8]
             _html = """
-                <td><button class="del" data-theme="c" data-icon="flat-man" data-role="button">删除</button><button class="edit">修改</button><button class="update">更新</button></td>
+                <td contenteditable="false">#{_html_control}</td>
                 <td style="text-align:center;font-size:15px;">#{i}</td>
                 <td style="text-align:center">#{remarks_json["uid"]}</td>
                 <td>#{remarks_json["first_pioneer"]}</td>
@@ -82,7 +89,7 @@ comments_use_action=()->
             """
         else
             _html = """
-                <td><button class="del">删除</button><button class="edit">修改</button><button class="update">更新</button></td>
+                <td contenteditable="false">#{_html_control}</td>
                 <td style="text-align:center;font-size:15px;">#{i}</td>
                 <td style="text-align:center">#{comment_use["uid"]}</td>
                 <td>#{comment_use["first_pioneer"]}</td>
@@ -329,3 +336,6 @@ $("body").on "click",".wlb_save_line",(e)->
     check_content_action_in_load uid,content_list,USER_ID,"abd538cb8cbf418781d006aa091f9162",null
 </script>
 <script src="/static/js/coffeescript.js"></script>
+
+
+
