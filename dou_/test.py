@@ -8,7 +8,7 @@ page_num = 0
 page_num_end = 3
 # SK-II 从第二页开始
 page_with_items = [13,13,13,13,8]
-t=21
+t=22
 action_list = [
     {
         "x": 127,
@@ -72,6 +72,7 @@ def pyautogui_action(action):
     print(action.get("action_name"))
     action_sleep = action.get("sleep", 0)
     time.sleep(action_sleep)
+
 for page in page_with_items:
     for item in range(3,page):
         action_item_click_list=[
@@ -112,7 +113,7 @@ result.push(document.getElementsByClassName("card--1fmeJ")[%s].getElementsByClas
 result.push(document.getElementsByClassName("card--1fmeJ")[%s].getElementsByClassName("valueWrapper--3jbBR")[1].innerText)
 result.push(document.getElementsByClassName("card--1fmeJ")[%s].getElementsByClassName("valueWrapper--3jbBR")[2].innerText)
 result_info={
-    "date":"1月%s日",
+    "date":"2月%s日",
     "name":result[0],
     "time":result[1],
     "clinch":result[2],

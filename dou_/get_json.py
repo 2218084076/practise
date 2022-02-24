@@ -15,10 +15,11 @@ table.write(0,6,"千次观看成交金额")
 
 urls=[
     ["1","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id="],
-    ["2","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=3408329ac8034aedb1d4c872de197070"],
-    ["3","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=97f82440b76c4027b71426875db67788"],
-    ["4","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=ce7102a5ec804425b3d10ea00102b022"],
-    ["5","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=2bbdc46177164ac182f7ce06a9edb8d5"]
+    ["2","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=5d47f70c75fe4db98cf11d74b02471af"],
+    ["3","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=b9822560b8e3491b91abe36fada85283"],
+    ["4","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=97f82440b76c4027b71426875db67788"],
+    ["5","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=ce7102a5ec804425b3d10ea00102b022"],
+    ["6","https://www.qianshanghua.com/api/page/comment/load?chat_id=6a5d11bb4b8a458985dac21079802937&comment_id=2bbdc46177164ac182f7ce06a9edb8d5"],
 ]
 base_i=1
 for url in urls:
@@ -45,7 +46,7 @@ for url in urls:
         table.write(base_i+i,4,l[i]["clinch"])
         table.write(base_i+i,5,l[i]["number"])
         table.write(base_i + i, 6,l[i]["thousands"])
-        excel.save(r"D:\github\practise\dou_\dooyin.xls")
+        excel.save(r"D:\github\practise\dou_\dou_220223.xls")
         print(i,l[i]["name"])
     base_i=base_i+len(l)
 
