@@ -19,11 +19,11 @@ bucket = new AWS.S3({
 })
 
 $("body").on "click",".file_add",(evt)->
-    time_start = (new Date()).getTime()
     $(".wlb_upload").text "上传中"
     file = $(".file_input")[0].files[0]
+    console.log file
     params =
-        Key: "bangfer/#{file.name}"
+        Key: "wlb/#{file.name}"
         ContentType: file.type
         Body: file
         ACL: 'public-read'
@@ -37,10 +37,9 @@ encode_from_s3 = (data)->
         ,''
     return btoa(str).replace(/.{76}(?=.)/g,'$&\n')
 $("body").on "click",".load_file",(evt)->
-    time_start = (new Date()).getTime()
     dom = $(this)
     dom_preview_str = dom.parents(".load_preview_area").first().find(".load_preview_str")
-    dom_preview_str.text "加载中"
+    dom_preview_str.text "加载中..."
     dom_preview = dom.parents(".load_preview_area").first().find(".load_preview")
     dom_preview.empty()
     dom_load_key = dom.parents(".load_preview_area").first().find(".load_key").text()
@@ -78,6 +77,7 @@ $(window).on "load",()->
         catch
             content = content
         if content_json != null
+            console.log content_json
             key = content_json["Location"].split("https://us1-dcs-s3.bifrostcloud.com/")[1]
             key = decodeURIComponent(key)
             content = """

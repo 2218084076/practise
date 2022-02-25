@@ -1,7 +1,7 @@
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.235.1.min.js"></script>
 <button id="wlb_upload">upload</button>
 <button id="wlb_download">download</button>
-<input id="file-chooser" type="file"/>
+<input id="file-chooser" type="file">
 <p id="results"></p>
 <script>
 
@@ -30,6 +30,8 @@ var button = document.getElementById('wlb_upload');
                 console.log(err); //打印出错误
                 results.innerHTML = err ? 'ERROR!' : 'UPLOADED.';
                 console.log(data);
+                $(".comments_area[data-block=be280473039548fcaf67911feb5473db]").find(".comment_content").val(JSON.stringify(data))
+                $(".comments_area[data-block=be280473039548fcaf67911feb5473db]").find(".comment_submit").click()
             });
         } else {
             results.innerHTML = 'Nothing to upload.';
