@@ -74,7 +74,7 @@ import base64
 def get_article_info(short_link):
     # short_link = argv_dir.get("--link",None)
     print("\nshort_link:",short_link)
-    browser = webdriver.Chrome()
+    browser = webdriver.Chrome('C:/Users/Terry/anaconda3/Scripts/chromedriver.exe')
     browser.get(short_link)
     time.sleep(3)
     small_pic = browser.find_element_by_class_name("small-pic")
