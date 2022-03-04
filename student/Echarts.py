@@ -10,5 +10,5 @@ bar = Bar("柱状图", "一年的降水量与蒸发量")
 # //添加柱状图的数据及配置项
 bar.add("降水量", columns, data1, mark_line=["average"], mark_point=["max", "min"])
 bar.add("蒸发量", columns, data2, mark_line=["average"], mark_point=["max", "min"])
-# //生成本地文件（默认为.html文件00
+# //生成本地文件（默认为.html文件）
 bar.render()
