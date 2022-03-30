@@ -20,5 +20,14 @@ def analysis_works (a):
     url=f'{url}'
     print(url)
     return url
-u = analysis_works('8.71 hBG:/ %东北妈妈穿啥 冬季篇，张喽张喽给家长买点衣服过冬！！！  https://v.douyin.com/Rda7ryq/ 複制此链接，打開Dou荫搜索，直接观看视頻！')
-get_video(u)
+
+def get_img(url):
+    print("== download ==")
+    aim_response = requests.get(url)
+    t = int(round(time.time() * 1000))  # 毫秒集
+    f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s.%s' % (time.time(), "jpg")), "ab")
+    f.write(aim_response.content)
+
+get_img('')
+# u = analysis_works('8.71 hBG:/ %东北妈妈穿啥 冬季篇，张喽张喽给家长买点衣服过冬！！！  https://v.douyin.com/Rda7ryq/ 複制此链接，打開Dou荫搜索，直接观看视頻！')
+# get_video(u)
