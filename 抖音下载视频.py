@@ -16,7 +16,7 @@ def get_video(url):
     f.write(aim_response.content)
 def analysis_works (a):
     print("==解析分享链接==")
-    url = 'http'+a.split('http')[1].split('複制')[0]
+    url = 'http'+a.split('http')[1].split('复制')[0]
     url=f'{url}'
     print(url)
     return url
@@ -28,6 +28,5 @@ def get_img(url):
     f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s.%s' % (time.time(), "jpg")), "ab")
     f.write(aim_response.content)
 
-get_img('')
-# u = analysis_works('8.71 hBG:/ %东北妈妈穿啥 冬季篇，张喽张喽给家长买点衣服过冬！！！  https://v.douyin.com/Rda7ryq/ 複制此链接，打開Dou荫搜索，直接观看视頻！')
-# get_video(u)
+u = analysis_works(input('aaa'))
+get_video(u)
