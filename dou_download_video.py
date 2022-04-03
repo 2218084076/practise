@@ -5,22 +5,24 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 def get_video(url,name):
-    print("====下载视频====")
+    print("====  browser response  ====")
     driver = webdriver.Chrome('C:/Users/Terry/anaconda3/Scripts/chromedriver.exe')
-    driver.minimize_window()
-    time.sleep(2)
+    # driver.minimize_window()
+    time.sleep(1)
     driver.get(url)
-    user_name = driver.find_elements(By.CLASS_NAME,"CjPRy13J")[0].text.replace("\n",'_')
-    print(user_name)
+    print("====  get share link  ====")
+    upload_time = driver.find_elements(By.CLASS_NAME,"aQoncqRg")[0].text.split(" ")[0]
+    print(upload_time)
     v_url = driver.find_elements(By.TAG_NAME,"source")[0]
     video_url=v_url.get_attribute("src")
     aim_url = video_url
     print('download%s'%(aim_url))
-    print("== download ==")
+    print("==== download video ====")
     aim_response = requests.get(video_url)
     t = int(round(time.time() * 1000))  # 毫秒集
-    f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s_%s.%s' % (user_name,name, "mp4")), "ab")
+    f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s%s_%s.%s' % ("抖音",upload_time,name, "mp4")), "ab")
     f.write(aim_response.content)
+    print("====  Download successful  ====")
 def analysis_works (a):
     print("==解析分享链接==")
     name = a.split(":/ ")[1].split("https")[0]
@@ -31,7 +33,7 @@ def analysis_works (a):
     print(url)
     return url,name
 
-def get_img(url):
+def download_img(url):
     print("== download ==")
     aim_response = requests.get(url)
     t = int(round(time.time() * 1000))  # 毫秒集
