@@ -23,6 +23,7 @@ def get_video(url,name):
     f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s%s_%s.%s' % ("抖音",upload_time,name, "mp4")), "ab")
     f.write(aim_response.content)
     print("====  Download successful  ====")
+
 def analysis_works (a):
     print("==解析分享链接==")
     name = a.split(":/ ")[1].split("https")[0]
@@ -40,6 +41,9 @@ def download_img(url):
     f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s.%s' % (time.time(), "jpg")), "ab")
     f.write(aim_response.content)
 
-u = analysis_works(input('抖音分享链接\n'))
+
+# 在这个文件下写的都是要用的方法,我们在本地新开一个py文件
+# 这个文件都是命名的方法
+'''u = analysis_works(input('抖音分享链接\n'))
 print(u)
-get_video(u[0],u[1])
+get_video(u[0],u[1])'''
