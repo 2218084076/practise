@@ -207,6 +207,7 @@ class GetArticleInfoAPIHandler(tornado.web.RequestHandler):
             return
         result = yield get_article_info(short_link)
         self.finish({"info":"ok","result":result})
+
 class GetArticleJsonAPIHandler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
     def get(self):
