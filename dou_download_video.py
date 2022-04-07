@@ -4,15 +4,15 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-def get_video(url,name):
+def get_video(url):
     print("====  browser response  ====")
     driver = webdriver.Chrome('C:/Users/Terry/anaconda3/Scripts/chromedriver.exe')
     # driver.minimize_window()
     time.sleep(1)
     driver.get(url)
     print("====  get share link  ====")
-    upload_time = driver.find_elements(By.CLASS_NAME,"aQoncqRg")[0].text.split(" ")[0]
-    print(upload_time)
+    name = driver.find_elements(By.CLASS_NAME,"yy223mQ8")[0].text.split(" ")[0]
+    print(name)
     v_url = driver.find_elements(By.TAG_NAME,"source")[0]
     video_url=v_url.get_attribute("src")
     aim_url = video_url
@@ -20,7 +20,7 @@ def get_video(url,name):
     print("==== download video ====")
     aim_response = requests.get(video_url)
     t = int(round(time.time() * 1000))  # 毫秒集
-    f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s%s_%s.%s' % ("抖音",upload_time,name, "mp4")), "ab")
+    f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/dou%s_%s.%s' % (name,time.time(), "mp4")), "ab")
     f.write(aim_response.content)
     print("====  Download successful  ====")
 
