@@ -69,6 +69,8 @@ def write_to_file(n):
     excel.save(r"D:\Desktop\shanghai_COVID-19--1.xls")
 
 # for i in range(1,31):
-#     write_to_file(i)
+    # write_to_file(i)
+write_to_file(1)
 
-get_news_urls('http://www.nhc.gov.cn/xcs/yqtb/list_gzbd.shtml')
+
+# get_news_urls('http://www.nhc.gov.cn/xcs/yqtb/list_gzbd.shtml')
