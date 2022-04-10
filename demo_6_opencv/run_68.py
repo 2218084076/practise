@@ -8,7 +8,9 @@ predictor = dlib.shape_predictor("./data/dlib/shape_predictor_68_face_landmarks.
 
 while True:
     ret, frame = camera.read()
+    frame = cv2.flip(frame,1) #镜头镜像
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
     if ret:
         faces = detector(gray,0)
         for face in faces:

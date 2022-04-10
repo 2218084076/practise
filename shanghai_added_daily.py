@@ -34,9 +34,10 @@ def get_news_urls(info_url):
 
 def get_Added_daily(url):
     browser = webdriver.Chrome('C:/Users/Terry/anaconda3/Scripts/chromedriver.exe')
-    time.sleep(1)
+    browser.minimize_window()
+    time.sleep(0.5)
     browser.get(url)
-    time.sleep(2)
+    time.sleep(1)
     title = browser.find_elements(By.CLASS_NAME,'rich_media_title')[0].text
     time.sleep(0.5)
     browser.quit()

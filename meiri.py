@@ -28,7 +28,7 @@ def dingdong(x,y,t):
     # os.system("adb -s 9038c19f shell input tap %s %s" % (982, 1054))
 n=1
 for i in range(0,20000):
-    t=random.uniform(0,0.5)
+    t=random.uniform(0,0.3)
     x2=random.randint(761,972)
     y2=random.randint(2225,2292)
     # x=random.randint(770,950)
