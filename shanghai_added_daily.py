@@ -33,7 +33,7 @@ def get_news_urls(info_url):
     return l
 
 def get_Added_daily(url):
-    browser = webdriver.Chrome('C:/Users/Terry/anaconda3/Scripts/chromedriver.exe')
+    browser = webdriver.Chrome(r'C:\Users\Terry\AppData\Local\Programs\Python\Python310\Scripts\chromedriver.exe')
     browser.minimize_window()
     time.sleep(0.5)
     browser.get(url)

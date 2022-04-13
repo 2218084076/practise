@@ -4,6 +4,8 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+
+
 def get_video(url):
     print("====  browser response  ====")
     driver = webdriver.Chrome('C:/Users/Terry/anaconda3/Scripts/chromedriver.exe')
@@ -38,9 +40,9 @@ def download_img(url):
     print("== download ==")
     aim_response = requests.get(url)
     t = int(round(time.time() * 1000))  # 毫秒集
-    f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s.%s' % (time.time(), "jpg")), "ab")
+    f = open(os.path.join(os.path.dirname(__file__),'D:/Desktop/%s.%s' % (time.time(), "mp4")), "ab")
     f.write(aim_response.content)
-
+download_img('https://player.bailidai.cc/file/yunzhuanma/data/1da2acb8deae836731f1c95361ec4ad9/450/index2.js')
 
 # 在这个文件下写的都是要用的方法,我们在本地新开一个py文件
 # 这个文件都是命名的方法
