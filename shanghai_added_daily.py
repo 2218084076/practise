@@ -44,7 +44,7 @@ def get_Added_daily(url):
     date = title.split('（')[0]
     new_p1 = title.split('上海新增')[1].split('例本土新冠肺炎确诊病例')[0]
     new_p2 = title.split('，新增')[1].split('例本土无症状感染者')[0]
-    new_p3 = title.split('本土无症状感染者，新增')[1].split('例境外输入病例')[0]
+    new_p3 = title.split('本土无症状感染者，新增')[1].split('例境外输入')[0]
     return_json ={
         'date_time':date,
         'new_p1':new_p1,
