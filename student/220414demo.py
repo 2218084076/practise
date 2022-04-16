@@ -1,4 +1,4 @@
-import pandas as pd
+'''import pandas as pd
 import matplotlib.pyplot as plt
 plt.rcParams["font.sans-serif"]=['SimHei']
 plt.rcParams["axes.unicode_minus"]=False
@@ -17,4 +17,10 @@ plt.scatter(df['lock_time'],df['accounts_payable'])
 plt.figure(figsize=(20,5),dpi=90)
  
 plt.plot(df['lock_time'],df['accounts_payable'])
-plt.show()
+plt.show()'''
+
+
+import pandas as pd
+
+df = pd.DataFrame(pd.read_csv("E:/tmp/test.csv",encoding='gb3212'))
+print(df.head(6))
