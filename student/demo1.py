@@ -1,4 +1,4 @@
-import requests
+import reas
 import json
 
 url = 'http://www.cdfgsanya.com/product-list.html?sw=%E7%A7%91%E9%A2%9C%E6%B0%8F'
