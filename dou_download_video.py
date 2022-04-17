@@ -11,17 +11,14 @@ def get_video(url):
     driver.minimize_window()
     time.sleep(0.3)
     driver.get(url)
-    time.sleep(1)
     print("====  get share link  ====")
-    name = driver.find_elements(By.CLASS_NAME, "yy223mQ8")[0].text.split(" ")[0]
-    print(name)
-    v_url = driver.find_elements(By.TAG_NAME, "source")[0]
-    video_url = v_url.get_attribute("src")
+    v_url = driver.find_elements(By.TAG_NAME, "source")[2]
+    video_url = 'www' + v_url.get_attribute("src").split('//www')[1].split('&file_id')[0]
     aim_url = video_url
     print('download%s' % aim_url)
     print("==== download video ====")
     aim_response = requests.get(video_url)
-    f = open(os.path.join(os.path.dirname(__file__), 'D:/Desktop/dou%s_%s.%s' % (name, time.time(), "mp4")), "ab")
+    f = open(os.path.join(os.path.dirname(__file__), 'D:/Desktop/%s.%s' % (time.time(), "mp4")), "ab")
     f.write(aim_response.content)
     print("====  Download successful  ====")
 
