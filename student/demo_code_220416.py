@@ -1,5 +1,6 @@
 # coding=utf-8
 """demo Internet worm"""
+
 import time
 
 from selenium import webdriver
