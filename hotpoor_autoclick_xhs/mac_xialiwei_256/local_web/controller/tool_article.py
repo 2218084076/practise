@@ -83,7 +83,7 @@ def get_article_info(short_link):
     num = 0
     image_links = []
     t = int(round(time.time() * 1000))  # 毫秒级时间戳
-    t = browser.current_url.split("/")[5].split("?")[0]
+    # t = browser.current_url.split("/")[5].split("?")[0]
     t_is_exists = os.path.exists(os.path.join(os.path.dirname(__file__),'../static/files/%s.%s'%(t,"json")))
 
     if not t_is_exists:
@@ -212,9 +212,11 @@ class GetArticleJsonAPIHandler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
     def get(self):
         t = self.get_argument("t",None)
+        t = int(round(time.time() * 1000))  # 毫秒级时间戳
+
         if not t:
             self.finish({"info":"error","about":"no t"})
             return
-        f = open(os.path.join(os.path.dirname(__file__),'../static/files/%s.%s'%(t,"json"))).read()
+        f = open(os.path.join(os.path.dirname(__file__),r'D:\github\practise\hotpoor_autoclick_xhs\mac_xialiwei_256\local_web\static\files\%s.%s'%(t,"json"))).read()
         result = json_decode(f)
         self.finish({"info":"ok","result":result})

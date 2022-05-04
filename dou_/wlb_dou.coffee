@@ -284,6 +284,29 @@ check_content_action_in_load = (uid,content_list,user_id,chat_id,comment_id=null
         error:(data)->
             console.log data
 
+
+get_info = ()->
+    a=document.getElementsByClassName("text-c  mt-10")[0]
+    l = a.getElementsByTagName("td")
+    result_list=[]
+    for i in l
+        result_list.push i.innerText.replaceAll("\n","").replaceAll("\t","")
+    result_json = {
+        'id': result_list[0],
+        'product_name': result_list[1],
+        'Partner_code': result_list[2],
+        'Partner name': result_list[3],
+        'trade_code': result_list[4],
+        'trade_name': result_list[5],
+        'area_code': result_list[6],
+        'location':result_list[7],
+        'first_quantity':result_list[8],
+        'first_unit':result_list[9],
+        'second_quantity':result_list[10],
+        'second_unit':result_list[11],
+        'RMB':result_list[12],
+    }
+    return result_json
 show_content_in_load("abd538cb8cbf418781d006aa091f9162")
 
 $("body").on "click",".update",()->
