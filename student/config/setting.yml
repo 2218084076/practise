@@ -1,0 +1,47 @@
+show_sql: true
+
+#db_url: sqlite+aiosqlite:////tmp/crawlerstack_proxypool
+db_url: mysql+aiomysql://root:000000@localhost/proxypool
+
+redis_url: redis://localhost
+fetch_task:
+  - name: foo
+    urls: [ ]
+    parser:
+      name: json
+    dest:
+      - http
+      - https
+
+  - name: cool-proxy
+    urls:
+      - https://cool-proxy.net/proxies.json
+    parser:
+      name: json
+    dest:
+      - http
+      - https
+    schedule:
+      trigger: interval
+      seconds: 120
+
+validate_task:
+#  - name: http
+#    urls: ['http://httpbin.iclouds.work/ip']
+#    sources: []
+#    checker:
+#      name: anonymous
+#    dest: http
+#    schedule:
+#      trigger: interval
+#      seconds: 20
+#
+#  - name: https
+#    urls: ['https://httpbin.iclouds.work/ip']
+#    sources: []
+#    checker:
+#      name: anonymous
+#    dest: https
+#    schedule:
+#      trigger: interval
+#      seconds: 20

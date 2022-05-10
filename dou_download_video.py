@@ -33,7 +33,7 @@ def analysis_works(a):
 def download_img(url):
     print("== download ==")
     aim_response = requests.get(url)
-    f = open(os.path.join(os.path.dirname(__file__), 'D:/Desktop/%s.%s' % (time.time(), "mp4")), "ab")
+    f = open(os.path.join(os.path.dirname(__file__), './%s.%s' % (time.time(), "jpg")), "ab")
     f.write(aim_response.content)
 
 # 在这个文件下写的都是要用的方法,我们在本地新开一个py文件
