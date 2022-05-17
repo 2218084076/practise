@@ -2,6 +2,8 @@ import json
 import ipaddress
 import httpx
 from lxml import etree
+import urllib.request
+from bs4 import BeautifulSoup
 
 s = '[{"port": 80, "score": 150.549, "update_time": 1652509227.0, "anonymous": 1, "download_speed_average": 56917.2, "response_time_average": 6.10687, "country_code": "US", "ip": "162.214.202.170", "working_average": 87.8431, "country_name": "United States"}]'
 
@@ -40,19 +42,22 @@ def demo(s):
 
 
 def parse(rows_rule, row_start, row_end):
-    url = 'http://www.66ip.cn/'
-    response = httpx.get(url)
-    html = etree.HTML(response.text)
+    # url = 'http://www.66ip.cn/'
+    # response = httpx.get(url)
+    soup = BeautifulSoup(open(r"D:\github\crawlerstack-proxypool\tests\common\html.html"),
+                         features='html.parser')
+    print(soup)
+    html = etree.HTML(str(soup))
     items = []
     rows = html.xpath(rows_rule)[row_start:]
     if row_end is not None:
-        rows = rows[:row_end]
+        rows = rows[row_end]
 
     for row in rows:
         row_html = etree.tostring(row).decode()
         if '透明' in row_html or 'transparent' in row_html.lower():
             continue
-        proxy_ip = parse_row(row=row)
+        proxy_ip = parse_row(row)
         if proxy_ip:
             items.extend(proxy_ip)
     return items
@@ -65,6 +70,11 @@ def parse_row(row) -> list[str] | None:
     :return: 127.0.0.1:1080 / ''
     """
     row_html = etree.tostring(row).decode()
+    columns_rule = 'td'
+    ip_position = 0
+    port_position = 1
+    port_rule = 'text()'
+    ip_rule = 'text()'
     try:
         proxy_ip = ''
         if columns_rule:
@@ -90,7 +100,7 @@ def parse_row(row) -> list[str] | None:
     # I'm not sure if it's going to cause anything else.
     # But I want to avoid a problem that could cause a program to fail
     except Exception as ex:  # pylint: disable=broad-except
-        print('Parse row error %s. \n%s', ex, row_html)
+        print('e')
     return None
 
 
