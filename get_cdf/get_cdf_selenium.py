@@ -1,5 +1,3 @@
-import json
-import random
 import time
 
 import pymongo
@@ -49,18 +47,22 @@ class Browser:
         self.browser.get('https://www.cdfgsanya.com/brand-shop.html?id=248431')
         time.sleep(10)
         product_list = self.browser.find_elements(By.CLASS_NAME, 'product-item-default')
-
-        for p in range(3, len(product_list)):
+        print('product_list', len(product_list))
+        for p in range(0, len(product_list)):
             product_list[p].click()
             time.sleep(self.sleep)
             self.browser.switch_to.window(self.browser.window_handles.pop())
             time.sleep(self.sleep)
 
-            if self.browser.find_elements(By.CLASS_NAME, 'style-normal-list'):
-                items = self.browser.find_elements(By.CLASS_NAME, 'style-normal-list')[0].find_elements(By.TAG_NAME,
-                                                                                                        'li')
+            items = self.browser.find_elements(By.CLASS_NAME, 'style-normal-item')
+            colors = self.browser.find_elements(By.CLASS_NAME, 'style-color-item')
+            print(len(items), len(colors))
+            if len(items) > 0:
+
                 for n in range(len(items)):
-                    items[n].click()
+                    time.sleep(self.sleep)
+
+                    self.browser.find_elements(By.CLASS_NAME, 'style-normal-item')[n].click()
 
                     time.sleep(self.sleep)
 
@@ -72,10 +74,12 @@ class Browser:
                 self.browser.switch_to.window((self.browser.window_handles[0]))
                 time.sleep(self.sleep)
 
-            if self.browser.find_elements(By.CLASS_NAME, 'style-color-list')[0].find_elements(By.TAG_NAME, 'li'):
-                for n in self.browser.find_elements(By.CLASS_NAME, 'style-color-list')[0].find_elements(By.TAG_NAME,
-                                                                                                        'li'):
-                    self.browser.execute_script('arguments[0].click();', n)
+            if len(colors) > 0:
+
+                for c in range(len(colors)):
+                    time.sleep(self.sleep)
+
+                    self.browser.find_elements(By.CLASS_NAME, 'style-color-item')[c].click()
 
                     time.sleep(self.sleep)
                     info_json = self.parse()
@@ -85,7 +89,6 @@ class Browser:
                 self.browser.close()
                 self.browser.switch_to.window((self.browser.window_handles[0]))
                 time.sleep(self.sleep)
-
             else:
                 time.sleep(self.sleep)
 
@@ -121,6 +124,7 @@ class Browser:
         """
         parse
         """
+
         detail_box_title = self.browser.find_elements(By.CLASS_NAME, 'detail-box-title')[0].text
         product_name = self.browser.find_elements(By.CLASS_NAME, 'product-name')[0].text
         product_code_value = self.browser.find_elements(By.CLASS_NAME, 'product-code-value')[0].text
