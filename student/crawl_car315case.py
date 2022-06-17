@@ -3,10 +3,10 @@ import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
-# option = webdriver.ChromeOptions()
-# option.add_argument("headless")
-# browser = webdriver.Chrome(chrome_options=option)
+# 设置浏览器无头打开
+option = webdriver.ChromeOptions()
+option.add_argument("headless")
+browser = webdriver.Chrome(chrome_options=option)
 browser = webdriver.Chrome()
 
 

@@ -5,12 +5,12 @@
 import json
 import time
 
-import requests
 import xlwt
 
+filename = '资生堂'
 date_time = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 excel = xlwt.Workbook(encoding='utf-8', style_compression=0)
-table = excel.add_sheet('date_time', cell_overwrite_ok=True)
+table = excel.add_sheet(time.strftime('%Y-%m-%d', time.localtime()), cell_overwrite_ok=True)
 
 table.write(0, 0, "序号")
 table.write(0, 1, "品牌")
@@ -64,7 +64,7 @@ for url in urls:
 n = 1
 with open('D:/cdf.json', 'r', encoding='utf-8') as f:
     infos_json = json.loads(f.read())
-    # print(infos_json[356])
+    print(infos_json)
     for i in infos_json:
         print(n, i)
         table.write(n, 0, n)
@@ -78,11 +78,10 @@ with open('D:/cdf.json', 'r', encoding='utf-8') as f:
             m = m + json.loads(i.get("property-item")).get("保质期", "")
         except:
             m = i.get("property-item").get("规格", "")
-            m = m + i.get("property-item").get("保质期", "")
         table.write(n, 6, m)
         try:
             table.write(n, 7, i.get('property-item'))
         except:
             table.write(n, 7, json.dumps(i.get('property-item'), ensure_ascii=False))
-        excel.save("D:/Desktop/cdf_220609.xls")
+        excel.save("D:/Desktop/cdf_%s_%s.xls" % (filename, time.strftime('%Y-%m-%d', time.localtime())))
         n += 1
