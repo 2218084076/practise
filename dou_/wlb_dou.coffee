@@ -326,16 +326,16 @@ $("body").on "click","#wlb_add_line",(evt)->
 <tr id="#{USER_ID}">
 <td><button class="wlb_save_line">save</button> <button class="wlb_remove_line">remove</button></td>
 <td>待确认</td>
-<td contenteditable="true">输入博主uid ...</td>
-<td contenteditable="true">输入开拓（首月）...</td> 
+<td contenteditable="true">输入博主uid</td>
+<td contenteditable="true">输入开拓（首月</td> 
 <td>#{USER_ID}</td>
-<td contenteditable="true">输入运维（首月）...</td>
-<td contenteditable="true">输入运维（首月）USER_ID...</td>
-<td contenteditable="true">输入开拓日期...</td>
-<td contenteditable="true">输入开拓（次月起）...</td>
+<td contenteditable="true">输入运维（首月</td>
+<td contenteditable="true">输入运维（首月）USER_ID</td>
+<td contenteditable="true">输入开拓日期</td>
+<td contenteditable="true">输入开拓（次月起</td>
 <td>#{USER_ID}</td>
-<td contenteditable="true">输入运维（次月起）...</td>
-<td contenteditable="true">输入运维（次月起）USER_ID...</td>
+<td contenteditable="true">输入运维（次月起</td>
+<td contenteditable="true">输入运维（次月起）USER_ID</td>
 </tr>
     """
 

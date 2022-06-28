@@ -1,0 +1,27 @@
+
+Running tests... 
+----------------------------------------------------------------------
+ mytest_testloader (unittest.loader._FailedTest) ... ERROR (0.000000)s
+
+======================================================================
+ERROR [0.000000s]: unittest.loader._FailedTest.mytest_testloader
+----------------------------------------------------------------------
+ImportError: Failed to import test module: mytest_testloader
+Traceback (most recent call last):
+  File "C:\Users\Terry\AppData\Local\Programs\Python\Python310\lib\unittest\loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Users\Terry\AppData\Local\Programs\Python\Python310\lib\unittest\loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "D:\github\practise\student\mytest_testloader.py", line 3, in <module>
+    from parameterized import  parameterized#导入parameterized包
+ModuleNotFoundError: No module named 'parameterized'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0:00:00
+
+FAILED
+ (Errors=1)
+
+Generating HTML reports... 
+reports\TestResults_unittest.loader._FailedTest_2022-05-18_22-18-10.html
