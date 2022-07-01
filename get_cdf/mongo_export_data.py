@@ -10,7 +10,7 @@ data_list = []
 filename = 'cdf_日化'
 date_time = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 excel = xlwt.Workbook(encoding='utf-8')
-table = excel.add_sheet('220619')
+table = excel.add_sheet(' ')
 
 table.write(0, 0, "序号")
 table.write(0, 1, "品牌")
@@ -23,7 +23,7 @@ table.write(0, 7, "商品详情数据")
 
 mongo_uri = 'localhost:27017'
 mongo_db = 'cdf'
-table_name = 'cdf_ClédePeauBeauté肌肤之钥'
+table_name = 'cdf_20220701补充'
 
 client = pymongo.MongoClient(mongo_uri)
 my_db = client[mongo_db]
@@ -32,8 +32,8 @@ documents = table.find()
 
 data = pd.DataFrame(list(documents))
 
-data.to_excel('cdf_日化.xls', encoding='utf-8')
-
+data.to_excel('cdf220701补充.xls', encoding='utf-8')
+print(data[['商品名称']])
 # n = 1
 #
 # for i in list(documents):
