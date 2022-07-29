@@ -1,3 +1,6 @@
+"""
+2022年7月29日使用过
+"""
 import time
 
 import pymongo
@@ -44,12 +47,10 @@ p = [4]
 page_1 = 4
 # 起始
 item = 18
-collection_name = 'cdf_20220729补充'
+collection_name = '20220729'
 
 # class BrowserNow:
-id_list = ['C046762', 'C046756', 'C046757', 'C046759', 'C046763', 'C053998', 'C053999', 'C101391', 'C048263', 'C048267',
-           'C049091', 'C039976', 'C050081', 'C003102', 'C024684', 'C029467', 'C053781', 'C050429', 'C048880', 'C035234',
-           'C050090', 'C035233', 'C101693', 'C101686', 'C101694', 'C101687', 'C043607', 'C052652']
+id_list = ['C052652']
 
 
 class Browser:
@@ -165,6 +166,7 @@ if __name__ == '__main__':
             browser.sku_id = i
             # browser.next_page()
             browser.brand_shop()
+        browser.close_browser()
 
     except Exception as e:
         print('Exception', e)
