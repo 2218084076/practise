@@ -44,14 +44,12 @@ p = [4]
 page_1 = 4
 # 起始
 item = 18
-collection_name = 'cdf_20220701补充'
+collection_name = 'cdf_20220729补充'
 
 # class BrowserNow:
-id_list = ['C052862', 'C053369', 'C046782', 'C046790', 'C048505',
-           'C046853', 'C046847', 'C048883', 'C025219', 'C026592', 'C024387', 'C053998', 'C048264', 'C054257', 'C048270',
-           'C048266', 'C056454', 'C053972', 'C049066', 'C048265', 'C049065', 'C048271', 'C048268', 'C048262', 'C056453',
-           'C054258', 'C049063', 'C049064', 'C057651', 'C052074', 'C101151', 'C101150', 'C101499', 'C043952', 'C043954',
-           'C043953', 'C043955', 'C055158', 'C100628', 'C055936', 'C000186']
+id_list = ['C046762', 'C046756', 'C046757', 'C046759', 'C046763', 'C053998', 'C053999', 'C101391', 'C048263', 'C048267',
+           'C049091', 'C039976', 'C050081', 'C003102', 'C024684', 'C029467', 'C053781', 'C050429', 'C048880', 'C035234',
+           'C050090', 'C035233', 'C101693', 'C101686', 'C101694', 'C101687', 'C043607', 'C052652']
 
 
 class Browser:
@@ -69,7 +67,7 @@ class Browser:
         self.url = 'https://www.cdfgsanya.com/brands.html'
         options = webdriver.ChromeOptions()
         options.add_experimental_option("prefs", self.prefs)
-        options.headless = True
+        # options.headless = True
         # options.add_argument('--proxy-server=https://218.161.32.34:8888')
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         self.browser = webdriver.Chrome(chrome_options=options)
