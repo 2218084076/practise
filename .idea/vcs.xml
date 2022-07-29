@@ -2,8 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/PaddleGAN" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/hotpoor_autoclick_xhs" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lipstick" vcs="Git" />
   </component>
 </project>

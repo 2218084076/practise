@@ -23,7 +23,7 @@ table.write(0, 7, "商品详情数据")
 
 mongo_uri = 'localhost:27017'
 mongo_db = 'cdf'
-table_name = 'cdf_20220701补充'
+table_name = 'CDF-20220721'
 
 client = pymongo.MongoClient(mongo_uri)
 my_db = client[mongo_db]
@@ -32,7 +32,7 @@ documents = table.find()
 
 data = pd.DataFrame(list(documents))
 
-data.to_excel('cdf220701补充.xls', encoding='utf-8')
+data.to_excel('CDF-20220721.xls', encoding='utf-8')
 print(data[['商品名称']])
 # n = 1
 #
