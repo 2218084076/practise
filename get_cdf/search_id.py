@@ -47,15 +47,16 @@ p = [4]
 page_1 = 4
 # 起始
 item = 18
-collection_name = '20220729'
+collection_name = ''
 
 # class BrowserNow:
-id_list = ['C052652']
+id_list = []
 
 
 class Browser:
     collection_name = collection_name
-    prefs = {"profile.managed_default_content_settings.images": 2}
+
+    # prefs = {"profile.managed_default_content_settings.images": 2}
 
     def __init__(self):
         self.size = None
@@ -67,7 +68,7 @@ class Browser:
         self.sku_id = None
         self.url = 'https://www.cdfgsanya.com/brands.html'
         options = webdriver.ChromeOptions()
-        options.add_experimental_option("prefs", self.prefs)
+        # options.add_experimental_option("prefs", self.prefs)
         # options.headless = True
         # options.add_argument('--proxy-server=https://218.161.32.34:8888')
         options.add_experimental_option('excludeSwitches', ['enable-logging'])

@@ -1,16 +1,25 @@
+#
 """export data"""
+import json
 import time
+from pathlib import Path
 
-import pandas as pd
 import pymongo
 import xlwt
 
 data_list = ['']
+index_dic = {
+    "商品编码": "$商品编码",
+    "link": "$link"}
 
-filename = 'cdf_'
+filename = '补充'
+mongo_uri = 'localhost:27017'
+mongo_db = 'cdf'
+table_name = '20220826补充'
+
 date_time = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 excel = xlwt.Workbook(encoding='utf-8')
-table = excel.add_sheet(' ')
+table = excel.add_sheet('cdf')
 
 table.write(0, 0, "序号")
 table.write(0, 1, "品牌")
@@ -21,41 +30,36 @@ table.write(0, 5, "商品促销")
 table.write(0, 6, "规格")
 table.write(0, 7, "商品详情数据")
 
-mongo_uri = 'localhost:27017'
-mongo_db = 'cdf'
-table_name = '20220729'
-
 client = pymongo.MongoClient(mongo_uri)
 my_db = client[mongo_db]
-table = my_db[table_name]
-documents = table.find()
+col = my_db[table_name]
 
-data = pd.DataFrame(list(documents))
+col.distinct('商品编码')
 
-data.to_excel('20220729.xls', encoding='utf-8')
-print(data[['商品名称']])
-# n = 1
-#
-# for i in list(documents):
-#     print(n, i)
-#     table.write(n, 0, n)
-#     table.write(n, 1, i.get('detail-box-title'))
-#     table.write(n, 2, i.get("product-name"))
-#
-#     table.write(n, 3, i.get('product-code-value'))
-#     table.write(n, 4, i.get("price-now"))
-#     table.write(n, 5, i.get("promotion-item"))
-#     try:
-#         m = json.loads(i.get("property-item")).get("规格", "")
-#         m = m + json.loads(i.get("property-item")).get("保质期", "")
-#     except Exception as e:
-#         print("error", e)
-#         m = i.get("property-item").get("规格", "")
-#     table.write(n, 6, m)
-#     try:
-#         table.write(n, 7, i.get('property-item'))
-#     except Exception as e:
-#         print("error", e)
-#         table.write(n, 7, json.dumps(i.get('property-item')))
-#     excel.save("D:/Desktop/%s_%s.xls" % (filename, time.strftime('%Y-%m-%d', time.localtime())))
-#     n += 1
+documents = col.find()
+n = 1
+
+for i in list(documents):
+    print(n, i)
+    table.write(n, 0, n)
+    table.write(n, 1, i.get('品牌'))
+    table.write(n, 2, i.get("商品名称"))
+
+    table.write(n, 3, i.get('商品编码'))
+    table.write(n, 4, i.get("当前价格"))
+    table.write(n, 5, i.get("商品促销"))
+    table.write(n, 8, i.get('link'))
+    try:
+        m = i.get("详细信息").get("规格", "")
+        m = m + i.get("详细信息").get("规格：", "")
+    except Exception as e:
+        print("error", e)
+        m = i.get("详细信息").get("规格：", "")
+    table.write(n, 6, m)
+    try:
+        table.write(n, 7, json.dumps(i.get('详细信息'), ensure_ascii=False))
+    except Exception as e:
+        print("error", e)
+        table.write(n, 7, json.dumps(i.get('详细信息')), ensure_ascii=False)
+    excel.save(Path("D:/Desktop/%s_%s.xls" % (filename, time.strftime('%Y%m%d%H', time.localtime()))))
+    n += 1
