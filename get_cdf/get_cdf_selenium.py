@@ -5,24 +5,6 @@ import redis
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-"""Use selenium to crawl cdf commodity data"""
-'''
-Atelier Cologne
-BIOTHERM
-GIORGIO ARMANI
-HR
-KIEHLS
-LA ROCHE POSAY
-LANCOME
-LOREAL
-Maison Margiela
-PRADA
-RALPH LAUREN
-SHU UEMURA
-SKINCEUTICALS
-VICHY
-YSL
-'''
 brand_list = [
     'https://www.cdfgsanya.com/brand-shop.html?id=281031',
     'https://www.cdfgsanya.com/brand-shop.html?id=248153',

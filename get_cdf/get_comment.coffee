@@ -3,6 +3,20 @@
 </div>
 <script type="text/coffeescript">
 comment_list=[]
+
+
+crawler =()->
+    product_list=document.getElementsByClassName("ckass_lit")
+    contents=[]
+    for i in product_list
+        contents.push {
+            'title':i.getElementsByTagName("h4")[0].innerText.replace("\n\n",""),
+            'price':i.getElementsByTagName("em")[0].innerText.replace("\n",""),
+            'stock':i.getElementsByTagName("li")[0].innerText.split("库存：")[1].split("已售")[0].replace("\n",""),
+            'sales':i.getElementsByTagName("li")[0].innerText.split("库存：")[1].split("已售")[0].replace("\n",""),
+        }
+    return contents
+
 www =(chat_id,comment_id=null)->
     $.ajax
         url:"/api/page/comment/load"
